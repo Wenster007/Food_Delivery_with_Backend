@@ -1,5 +1,7 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:food_delivery_with_backend/colors.dart';
+import 'package:food_delivery_with_backend/utils/colors.dart';
+import 'package:food_delivery_with_backend/utils/dimensions.dart';
 import 'package:food_delivery_with_backend/widgets/big_text.dart';
 import 'package:food_delivery_with_backend/widgets/icon_and_text_widget.dart';
 import 'package:food_delivery_with_backend/widgets/small_text.dart';
@@ -15,7 +17,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   PageController pageController = PageController(viewportFraction: 0.85);
   double _currPageValue = 0.0;
   double _scaleFactor = 0.8;
-  double _height = 220;
+  final double _height = Dimensions.height * 0.43;
 
   @override
   void initState() {
@@ -65,9 +67,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         children: [
           Container(
             height: MediaQuery.of(context).size.height * 0.3,
-            margin: const EdgeInsets.only(left: 10, right: 10),
+            margin: EdgeInsets.only(
+                left: Dimensions.height * 0.015,
+                right: Dimensions.height * 0.015),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(Dimensions.height * 0.04),
               color: index.isEven
                   ? const Color(0xFF69c5df)
                   : const Color(0xFF9294cc),
@@ -80,25 +84,32 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              padding: const EdgeInsets.only(
-                top: 10,
-                left: 15,
-                right: 15,
+              padding: EdgeInsets.only(
+                top: Dimensions.height * 0.012,
+                left: Dimensions.height * 0.02,
+                right: Dimensions.height * 0.02,
               ),
-              height: MediaQuery.of(context).size.height * 0.15,
-              margin: const EdgeInsets.only(left: 30, right: 30, bottom: 25),
+              height: Dimensions.height * 0.15,
+              margin: EdgeInsets.only(
+                  left: Dimensions.height * 0.04,
+                  right: Dimensions.height * 0.04,
+                  bottom: Dimensions.height * 0.04),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(Dimensions.height * 0.04),
                 color: Colors.white,
                 boxShadow: const [
                   BoxShadow(
-                    color: Colors.grey,
+                    color: Color(0xFFe8e8e8),
                     blurRadius: 10,
                     offset: Offset(0, 3),
                   ),
                   BoxShadow(
                     color: Colors.white,
                     offset: Offset(5, 0),
+                  ),
+                  BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(-5, 0),
                   ),
                 ],
               ),
@@ -108,18 +119,18 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   BigText(
                     text: "Range Of Burgers",
                   ),
-                  const SizedBox(
-                    height: 5,
+                  SizedBox(
+                    height: Dimensions.height * 0.008,
                   ),
                   Row(
                     children: [
                       Wrap(
                         children: List.generate(
                           5,
-                          (index) => const Icon(
+                          (index) => Icon(
                             Icons.star,
                             color: AppColor.mainColor,
-                            size: 16,
+                            size: Dimensions.height * 0.02,
                           ),
                         ),
                       ),
@@ -137,8 +148,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    height: Dimensions.height * 0.016,
                   ),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -168,16 +179,59 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.43,
-      // color: Colors.red,
-      child: PageView.builder(
-        controller: pageController,
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          return _buildPageItem(index);
-        },
-      ),
+    return Column(
+      children: [
+        //for displaying the main image and the box container
+        Container(
+          height: Dimensions.height * 0.43,
+          child: PageView.builder(
+            controller: pageController,
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return _buildPageItem(index);
+            },
+          ),
+        ),
+
+        //For displaying the Active Page Dots.
+        DotsIndicator(
+          dotsCount: 5,
+          position: _currPageValue.round(),
+          decorator: DotsDecorator(
+            activeColor: AppColor.mainColor,
+            size: Size.square(Dimensions.height * 0.013),
+            activeSize:
+                Size(Dimensions.height * 0.024, Dimensions.height * 0.0125),
+            activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(Dimensions.height * 0.008)),
+          ),
+        ),
+
+        SizedBox(
+          height: Dimensions.height * 0.02,
+        ),
+
+        Padding(
+          padding: EdgeInsets.only(left: Dimensions.height * 0.03),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+
+            children: [
+              BigText(text: "Popular"),
+              SizedBox(width: Dimensions.height * 0.008,),
+              Container(
+                margin: EdgeInsets.only(bottom: Dimensions.height * 0.003),
+                child: BigText(
+                  text: ".",
+                  color: Colors.black26,
+                ),
+              ),
+              SizedBox(width: Dimensions.height * 0.008,),
+              Container(margin: EdgeInsets.only(bottom:  Dimensions.height * 0.006) ,child: SmallText(text: "Food Pairing")),
+            ],
+          ),
+        )
+      ],
     );
   }
 }
