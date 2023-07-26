@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
-import 'package:food_delivery_with_backend/home/food_page_body.dart';
+import 'package:food_delivery_with_backend/pages/home/food_page_body.dart';
 import 'package:food_delivery_with_backend/widgets/big_text.dart';
 import 'package:food_delivery_with_backend/widgets/small_text.dart';
 
-import '../utils/dimensions.dart';
+import 'package:food_delivery_with_backend/utils/dimensions.dart';
 
 class MainFoodPage extends StatefulWidget {
   const MainFoodPage({Key? key}) : super(key: key);
@@ -66,7 +66,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
           ),
 
           //For displaying the carousel
-          const FoodPageBody(),
+          const Expanded(child: SingleChildScrollView(child: FoodPageBody())),
 
           //
         ],

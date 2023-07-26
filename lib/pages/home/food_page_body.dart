@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
+import 'package:food_delivery_with_backend/widgets/app_name_rating_icons.dart';
 import 'package:food_delivery_with_backend/widgets/big_text.dart';
 import 'package:food_delivery_with_backend/widgets/icon_and_text_widget.dart';
 import 'package:food_delivery_with_backend/widgets/small_text.dart';
@@ -113,63 +114,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   ),
                 ],
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BigText(
-                    text: "Range Of Burgers",
-                  ),
-                  SizedBox(
-                    height: Dimensions.height * 0.008,
-                  ),
-                  Row(
-                    children: [
-                      Wrap(
-                        children: List.generate(
-                          5,
-                          (index) => Icon(
-                            Icons.star,
-                            color: AppColor.mainColor,
-                            size: Dimensions.height * 0.02,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      SmallText(
-                        text: "5",
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      SmallText(
-                        text: "1287 Comments",
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: Dimensions.height * 0.016,
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconAndTextWidget(
-                          icon: Icons.circle,
-                          iconColor: AppColor.iconColor1,
-                          text: "Normal"),
-                      IconAndTextWidget(
-                          icon: Icons.location_on,
-                          iconColor: AppColor.mainColor,
-                          text: "1.7km"),
-                      IconAndTextWidget(
-                          icon: Icons.access_time_rounded,
-                          iconColor: AppColor.iconsColor2,
-                          text: "32min"),
-                    ],
-                  )
-                ],
-              ),
+              child: const AppNameRatingIcons(text: "Range Of Burgers"),
             ),
           ),
         ],
@@ -215,10 +160,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           padding: EdgeInsets.only(left: Dimensions.height * 0.03),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
-
             children: [
               BigText(text: "Popular"),
-              SizedBox(width: Dimensions.height * 0.008,),
+              SizedBox(
+                width: Dimensions.height * 0.008,
+              ),
               Container(
                 margin: EdgeInsets.only(bottom: Dimensions.height * 0.003),
                 child: BigText(
@@ -226,9 +172,99 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   color: Colors.black26,
                 ),
               ),
-              SizedBox(width: Dimensions.height * 0.008,),
-              Container(margin: EdgeInsets.only(bottom:  Dimensions.height * 0.006) ,child: SmallText(text: "Food Pairing")),
+              SizedBox(
+                width: Dimensions.height * 0.008,
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: Dimensions.height * 0.008),
+                child: SmallText(text: "Food Pairing"),
+              ),
             ],
+          ),
+        ),
+
+        //list of food and images
+        ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: 10,
+          itemBuilder: (context, index) => Container(
+            // color: Colors.red,
+            margin: EdgeInsets.only(
+              left: Dimensions.height * 0.03,
+              right: Dimensions.height * 0.03,
+              bottom: Dimensions.height * 0.02,
+            ),
+            child: Row(
+              children: [
+                //image container
+                Container(
+                  height: Dimensions.height * 0.15,
+                  width: Dimensions.height * 0.17,
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.circular(Dimensions.height * 0.01),
+                    color: Colors.white38,
+                    image: const DecorationImage(
+                        image: AssetImage("assets/images/food1.jpg"),
+                        fit: BoxFit.cover),
+                  ),
+                ),
+
+                //text Container
+                Expanded(
+                  child: Container(
+                    height: Dimensions.height * 0.14,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomRight:
+                            Radius.circular(Dimensions.height * 0.01),
+                        topRight: Radius.circular(Dimensions.height * 0.01),
+                      ),
+                      color: Colors.white,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: Dimensions.height * 0.01,
+                        top: Dimensions.height * 0.01,
+                        right: Dimensions.height * 0.01,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          BigText(text: "Nutritious Fruit Meal In China"),
+                          SizedBox(
+                            height: Dimensions.height * 0.008,
+                          ),
+                          SmallText(text: "With Chineese Characteristics"),
+                          SizedBox(
+                            height: Dimensions.height * 0.008,
+                          ),
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconAndTextWidget(
+                                  icon: Icons.circle,
+                                  iconColor: AppColor.iconColor1,
+                                  text: "Normal"),
+                              IconAndTextWidget(
+                                  icon: Icons.location_on,
+                                  iconColor: AppColor.mainColor,
+                                  text: "1.7km"),
+                              IconAndTextWidget(
+                                  icon: Icons.access_time_rounded,
+                                  iconColor: AppColor.iconsColor2,
+                                  text: "32min")
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         )
       ],
