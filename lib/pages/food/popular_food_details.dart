@@ -6,8 +6,6 @@ import 'package:food_delivery_with_backend/widgets/expandable_text.dart';
 
 import '../../utils/colors.dart';
 import '../../widgets/big_text.dart';
-import '../../widgets/icon_and_text_widget.dart';
-import '../../widgets/small_text.dart';
 
 class PopularFoodDetails extends StatelessWidget {
   const PopularFoodDetails({Key? key}) : super(key: key);

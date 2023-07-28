@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_with_backend/utils/dimensions.dart';
 
 class AppIcon extends StatelessWidget {
-  const AppIcon({
+  AppIcon({
     Key? key,
     required this.icon,
     this.backgroundColor = const Color(0xFFfcf4e4),
     this.iconColor = const Color(0xFF756d54),
-    this.size = 45,
-    this.iconSize = 18, required this.onTapFunc,
+    this.size = 0,
+    this.iconSize = 0, required this.onTapFunc,
   }) : super(key: key);
 
   final IconData icon;
@@ -22,16 +23,16 @@ class AppIcon extends StatelessWidget {
     return GestureDetector(
       onTap: onTapFunc,
       child: Container(
-        width: size,
-        height: size,
+        width: size==0? Dimensions.height * 0.055: size,
+        height: size==0? Dimensions.height * 0.055: size,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(size / 2),
+          borderRadius: BorderRadius.circular(size==0? Dimensions.height * 0.055: size / 2),
           color: backgroundColor,
         ),
         child: Icon(
           icon,
           color: iconColor,
-          size: iconSize,
+          size: iconSize == 0? Dimensions.height * 0.028: iconSize,
         ),
       ),
     );
