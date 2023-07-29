@@ -247,7 +247,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                               IconAndTextWidget(
                                   icon: Icons.circle,
                                   iconColor: AppColor.iconColor1,
-                                  text: "Normal"),
+                                  text: "Normal",),
                               IconAndTextWidget(
                                   icon: Icons.location_on,
                                   iconColor: AppColor.mainColor,

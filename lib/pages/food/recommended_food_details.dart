@@ -4,7 +4,6 @@ import 'package:food_delivery_with_backend/utils/dimensions.dart';
 import 'package:food_delivery_with_backend/widgets/app_icon.dart';
 import 'package:food_delivery_with_backend/widgets/big_text.dart';
 import 'package:food_delivery_with_backend/widgets/expandable_text.dart';
-import 'package:food_delivery_with_backend/widgets/small_text.dart';
 
 class RecommendedFoodDetails extends StatelessWidget {
   const RecommendedFoodDetails({Key? key}) : super(key: key);
