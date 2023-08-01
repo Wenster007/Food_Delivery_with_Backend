@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/pages/home/main_food_page.dart';
 import 'package:get/get.dart';
+import 'package:food_delivery_with_backend/helper/dependencies.dart' as dep;
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  dep.init();
   runApp(const MyApp());
 }
 
