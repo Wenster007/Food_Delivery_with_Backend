@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_with_backend/models/product_model.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
 import 'package:food_delivery_with_backend/widgets/app_icon.dart';
 import 'package:food_delivery_with_backend/widgets/big_text.dart';
 import 'package:food_delivery_with_backend/widgets/expandable_text.dart';
+import 'package:get/get.dart';
 
 class RecommendedFoodDetails extends StatelessWidget {
-  const RecommendedFoodDetails({Key? key}) : super(key: key);
+  const RecommendedFoodDetails({Key? key, required this.products}) : super(key: key);
+
+  final Products products;
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +20,15 @@ class RecommendedFoodDetails extends StatelessWidget {
         slivers: [
           //for image and the title text
           SliverAppBar(
+            automaticallyImplyLeading: false,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.clear, onTapFunc: () {}),
+                AppIcon(
+                    icon: Icons.clear,
+                    onTapFunc: () {
+                      Get.back();
+                    }),
                 AppIcon(icon: Icons.shopping_cart_outlined, onTapFunc: () {}),
               ],
             ),
@@ -27,7 +36,7 @@ class RecommendedFoodDetails extends StatelessWidget {
               preferredSize: Size.fromHeight(Dimensions.height * 0.06),
               child: Container(
                 padding:
-                EdgeInsets.symmetric(vertical: Dimensions.height * 0.01),
+                    EdgeInsets.symmetric(vertical: Dimensions.height * 0.01),
                 width: double.infinity,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
@@ -37,7 +46,7 @@ class RecommendedFoodDetails extends StatelessWidget {
                     topLeft: Radius.circular(Dimensions.height * 0.03),
                   ),
                 ),
-                child: BigText(text: "Range Of Burgers"),
+                child: BigText(text:products.name!),
               ),
             ),
             expandedHeight: Dimensions.height * 0.35,
@@ -54,16 +63,16 @@ class RecommendedFoodDetails extends StatelessWidget {
 
           SliverToBoxAdapter(
               child: Column(
-                children: [
-                  Container(
-                    margin:
+            children: [
+              Container(
+                margin:
                     EdgeInsets.symmetric(horizontal: Dimensions.height * 0.02),
-                    child: const ExpandableText(
-                        text:
+                child: const ExpandableText(
+                    text:
                         "Instructions: In a mixing bowl, combine ground beef, chopped onion, minced garlic, Worcestershire sauce, Dijon mustard, salt, and black pepper. Shape into 4 patties. Grill or cook patties on a skillet over medium-high heat for 4-5 minutes per side. Add cheese (optional) during the last minute of cooking. Toast burger buns. Assemble burgers by placing a lettuce leaf on the bottom bun, followed by a patty with melted cheese (if using), tomato slices, pickles, and other toppings. Optionally, spread ketchup and mustard on the top bun. Serve and enjoy! Customize with your favorite toppings. Instructions: In a mixing bowl, combine ground beef, chopped onion, minced garlic, Worcestershire sauce, Dijon mustard, salt, and black pepper. Shape into 4 patties. Grill or cook patties on a skillet over medium-high heat for 4-5 minutes per side. Add cheese (optional) during the last minute of cooking. Toast burger buns. Assemble burgers by placing a lettuce leaf on the bottom bun, followed by a patty with melted cheese (if using), tomato slices, pickles, and other toppings. Optionally, spread ketchup and mustard on the top bun. Serve and enjoy! Customize with your favorite toppings. Instructions: In a mixing bowl, combine ground beef, chopped onion, minced garlic, Worcestershire sauce, Dijon mustard, salt, and black pepper. Shape into 4 patties. Grill or cook patties on a skillet over medium-high heat for 4-5 minutes per side. Add cheese (optional) during the last minute of cooking. Toast burger buns. Assemble burgers by placing a lettuce leaf on the bottom bun, followed by a patty with melted cheese (if using), tomato slices, pickles, and other toppings. Optionally, spread ketchup and mustard on the top bun. Serve and enjoy! Customize with your favorite toppings. Instructions: In a mixing bowl, combine ground beef, chopped onion, minced garlic, Worcestershire sauce, Dijon mustard, salt, and black pepper. Shape into 4 patties. Grill or cook patties on a skillet over medium-high heat for 4-5 minutes per side. Add cheese (optional) during the last minute of cooking. Toast burger buns. Assemble burgers by placing a lettuce leaf on the bottom bun, followed by a patty with melted cheese (if using), tomato slices, pickles, and other toppings. Optionally, spread ketchup and mustard on the top bun. Serve and enjoy! Customize with your favorite toppings."),
-                  )
-                ],
-              ))
+              )
+            ],
+          ))
         ],
       ),
       bottomNavigationBar: Column(
@@ -80,7 +89,10 @@ class RecommendedFoodDetails extends StatelessWidget {
                     onTapFunc: () {},
                     iconSize: Dimensions.height * 0.037,
                     iconColor: Colors.white),
-                BigText(text: "\$10.00 X 0", color: AppColor.mainBlackColor,),
+                BigText(
+                  text: "\$10.00 X 0",
+                  color: AppColor.mainBlackColor,
+                ),
                 AppIcon(
                   icon: Icons.add,
                   backgroundColor: AppColor.mainColor,
@@ -114,17 +126,20 @@ class RecommendedFoodDetails extends StatelessWidget {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(
-                        Dimensions.height * 0.02),
+                    borderRadius:
+                        BorderRadius.circular(Dimensions.height * 0.02),
                   ),
-                  child: Icon(Icons.favorite, color: AppColor.mainColor,
-                    size: Dimensions.height * 0.03,),
+                  child: Icon(
+                    Icons.favorite,
+                    color: AppColor.mainColor,
+                    size: Dimensions.height * 0.03,
+                  ),
                 ),
                 Container(
                   padding: EdgeInsets.all(Dimensions.height * 0.016),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                        Dimensions.height * 0.02),
+                    borderRadius:
+                        BorderRadius.circular(Dimensions.height * 0.02),
                     color: AppColor.mainColor,
                   ),
                   child: BigText(
@@ -137,7 +152,6 @@ class RecommendedFoodDetails extends StatelessWidget {
           ),
         ],
       ),
-
     );
   }
 }

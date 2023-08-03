@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_with_backend/models/product_model.dart';
+import 'package:food_delivery_with_backend/utils/app_constants.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
 import 'package:food_delivery_with_backend/widgets/app_icon.dart';
 import 'package:food_delivery_with_backend/widgets/app_name_rating_icons.dart';
 import 'package:food_delivery_with_backend/widgets/expandable_text.dart';
+import 'package:get/get.dart';
 
 import '../../utils/colors.dart';
 import '../../widgets/big_text.dart';
 
 class PopularFoodDetails extends StatelessWidget {
-  const PopularFoodDetails({Key? key}) : super(key: key);
+  const PopularFoodDetails({Key? key, required this.products}) : super(key: key);
+
+  final Products products;
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +25,10 @@ class PopularFoodDetails extends StatelessWidget {
             Container(
               height: Dimensions.height * 0.4,
               width: double.infinity,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage(
-                      "assets/images/food1.jpg",
+                    image: NetworkImage(
+                      AppConstants.BASE_URL+"/uploads/"+products.img!,
                     ),
                     fit: BoxFit.cover),
               ),
@@ -39,7 +44,7 @@ class PopularFoodDetails extends StatelessWidget {
                   AppIcon(
                     icon: Icons.arrow_back_ios_new_outlined,
                     onTapFunc: () {
-                      Navigator.of(context).pop();
+                      Get.back();
                     },
                   ),
                   AppIcon(
@@ -69,8 +74,8 @@ class PopularFoodDetails extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const AppNameRatingIcons(
-                      text: "Range Of Burgers",
+                    AppNameRatingIcons(
+                      text: products.name!, rating: products.stars!,
                     ),
                     SizedBox(
                       height: Dimensions.height * 0.03,
@@ -82,11 +87,11 @@ class PopularFoodDetails extends StatelessWidget {
                     SizedBox(
                       height: Dimensions.height * 0.02,
                     ),
-                    const Expanded(
+                    Expanded(
                       child: SingleChildScrollView(
                         child: ExpandableText(
-                            text:
-                                "Instructions: In a mixing bowl, combine ground beef, chopped onion, minced garlic, Worcestershire sauce, Dijon mustard, salt, and black pepper. Shape into 4 patties. Grill or cook patties on a skillet over medium-high heat for 4-5 minutes per side. Add cheese (optional) during the last minute of cooking. Toast burger buns. Assemble burgers by placing a lettuce leaf on the bottom bun, followed by a patty with melted cheese (if using), tomato slices, pickles, and other toppings. Optionally, spread ketchup and mustard on the top bun. Serve and enjoy! Customize with your favorite toppings."),
+                            text: products.description!,
+                        ),
                       ),
                     )
                   ],
@@ -147,7 +152,7 @@ class PopularFoodDetails extends StatelessWidget {
                 color: AppColor.mainColor,
               ),
               child: BigText(
-                text: "\$10 | Add to cart",
+                text: "\$${products.price} | Add to cart",
                 color: Colors.white,
               ),
             ),
