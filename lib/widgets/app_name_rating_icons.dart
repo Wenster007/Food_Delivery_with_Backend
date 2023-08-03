@@ -7,9 +7,10 @@ import 'big_text.dart';
 import 'icon_and_text_widget.dart';
 
 class AppNameRatingIcons extends StatelessWidget {
-  const AppNameRatingIcons({Key? key, required this.text}) : super(key: key);
+  const AppNameRatingIcons({Key? key, required this.text, this.rating=5}) : super(key: key);
 
   final String text;
+  final int rating;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class AppNameRatingIcons extends StatelessWidget {
           children: [
             Wrap(
               children: List.generate(
-                5,
+                rating!=5?rating: 5,
                     (index) => Icon(
                   Icons.star,
                   color: AppColor.mainColor,
@@ -39,7 +40,7 @@ class AppNameRatingIcons extends StatelessWidget {
               width: 10,
             ),
             SmallText(
-              text: "5",
+              text: "$rating",
               size: Dimensions.height * 0.019,
             ),
             const SizedBox(

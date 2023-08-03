@@ -38,7 +38,9 @@ class PopularFoodDetails extends StatelessWidget {
                 children: [
                   AppIcon(
                     icon: Icons.arrow_back_ios_new_outlined,
-                    onTapFunc: () {},
+                    onTapFunc: () {
+                      Navigator.of(context).pop();
+                    },
                   ),
                   AppIcon(
                     icon: Icons.shopping_cart_outlined,

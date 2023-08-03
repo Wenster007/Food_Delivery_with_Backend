@@ -4,6 +4,7 @@ class Product {
   int? offset;
   List<Products>? products;
 
+
   Product({this.totalSize, this.typeId, this.offset, this.products});
 
   Product.fromJson(Map<String, dynamic> json) {
