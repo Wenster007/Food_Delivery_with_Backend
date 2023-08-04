@@ -97,13 +97,13 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             child: Container(
               padding: EdgeInsets.only(
                 top: Dimensions.height * 0.012,
-                left: Dimensions.height * 0.02,
-                right: Dimensions.height * 0.02,
+                left: Dimensions.height * 0.01,
+                right: Dimensions.height * 0.01,
               ),
               height: Dimensions.height * 0.15,
               margin: EdgeInsets.only(
-                  left: Dimensions.height * 0.04,
-                  right: Dimensions.height * 0.04,
+                  left: Dimensions.height * 0.03,
+                  right: Dimensions.height * 0.03,
                   bottom: Dimensions.height * 0.04),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.height * 0.04),
@@ -211,7 +211,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 width: Dimensions.height * 0.008,
               ),
               Container(
-                margin: EdgeInsets.only(bottom: Dimensions.height * 0.008),
+                margin: EdgeInsets.only(bottom: Dimensions.height * 0.003),
                 child: SmallText(text: "Food Pairing"),
               ),
             ],

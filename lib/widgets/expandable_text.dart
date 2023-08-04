@@ -18,7 +18,7 @@ class _ExpandableTextState extends State<ExpandableText> {
 
   bool hiddenText = true;
 
-  double textHeight = Dimensions.height * 0.43;
+  double textHeight = Dimensions.width * 0.6;
 
   @override
   void initState() {

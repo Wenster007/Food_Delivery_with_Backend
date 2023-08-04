@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/models/product_model.dart';
+import 'package:food_delivery_with_backend/utils/app_constants.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
 import 'package:food_delivery_with_backend/widgets/app_icon.dart';
@@ -53,8 +54,8 @@ class RecommendedFoodDetails extends StatelessWidget {
             pinned: true,
             backgroundColor: const Color.fromARGB(255, 222, 184, 22),
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/images/food1.jpg",
+              background: Image.network(
+                AppConstants.BASE_URL+"/uploads/"+products.img!,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
@@ -67,9 +68,9 @@ class RecommendedFoodDetails extends StatelessWidget {
               Container(
                 margin:
                     EdgeInsets.symmetric(horizontal: Dimensions.height * 0.02),
-                child: const ExpandableText(
+                child:  ExpandableText(
                     text:
-                        "Instructions: In a mixing bowl, combine ground beef, chopped onion, minced garlic, Worcestershire sauce, Dijon mustard, salt, and black pepper. Shape into 4 patties. Grill or cook patties on a skillet over medium-high heat for 4-5 minutes per side. Add cheese (optional) during the last minute of cooking. Toast burger buns. Assemble burgers by placing a lettuce leaf on the bottom bun, followed by a patty with melted cheese (if using), tomato slices, pickles, and other toppings. Optionally, spread ketchup and mustard on the top bun. Serve and enjoy! Customize with your favorite toppings. Instructions: In a mixing bowl, combine ground beef, chopped onion, minced garlic, Worcestershire sauce, Dijon mustard, salt, and black pepper. Shape into 4 patties. Grill or cook patties on a skillet over medium-high heat for 4-5 minutes per side. Add cheese (optional) during the last minute of cooking. Toast burger buns. Assemble burgers by placing a lettuce leaf on the bottom bun, followed by a patty with melted cheese (if using), tomato slices, pickles, and other toppings. Optionally, spread ketchup and mustard on the top bun. Serve and enjoy! Customize with your favorite toppings. Instructions: In a mixing bowl, combine ground beef, chopped onion, minced garlic, Worcestershire sauce, Dijon mustard, salt, and black pepper. Shape into 4 patties. Grill or cook patties on a skillet over medium-high heat for 4-5 minutes per side. Add cheese (optional) during the last minute of cooking. Toast burger buns. Assemble burgers by placing a lettuce leaf on the bottom bun, followed by a patty with melted cheese (if using), tomato slices, pickles, and other toppings. Optionally, spread ketchup and mustard on the top bun. Serve and enjoy! Customize with your favorite toppings. Instructions: In a mixing bowl, combine ground beef, chopped onion, minced garlic, Worcestershire sauce, Dijon mustard, salt, and black pepper. Shape into 4 patties. Grill or cook patties on a skillet over medium-high heat for 4-5 minutes per side. Add cheese (optional) during the last minute of cooking. Toast burger buns. Assemble burgers by placing a lettuce leaf on the bottom bun, followed by a patty with melted cheese (if using), tomato slices, pickles, and other toppings. Optionally, spread ketchup and mustard on the top bun. Serve and enjoy! Customize with your favorite toppings."),
+                        products.description!,),
               )
             ],
           ))
@@ -90,7 +91,7 @@ class RecommendedFoodDetails extends StatelessWidget {
                     iconSize: Dimensions.height * 0.037,
                     iconColor: Colors.white),
                 BigText(
-                  text: "\$10.00 X 0",
+                  text: "\$${products.price}.00 X 0",
                   color: AppColor.mainBlackColor,
                 ),
                 AppIcon(
@@ -143,7 +144,7 @@ class RecommendedFoodDetails extends StatelessWidget {
                     color: AppColor.mainColor,
                   ),
                   child: BigText(
-                    text: "\$10 | Add to cart",
+                    text: "\$${products.price} | Add to cart",
                     color: Colors.white,
                   ),
                 ),

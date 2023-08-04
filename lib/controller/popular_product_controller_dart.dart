@@ -10,6 +10,8 @@ class PopularProductController extends GetxController{
   List<dynamic> get getProductList => _popularProductList;
 
   bool isLoaded = false;
+  int _quantity = 1;
+  int get getQuantity => _quantity;
 
 
   Future<void> getPopularProductList() async{
@@ -25,4 +27,24 @@ class PopularProductController extends GetxController{
     }
   }
 
+  void setQuantity(bool isIncrement) {
+    if (isIncrement) {
+      if (_quantity<20){
+        _quantity++;
+      } else{
+        Get.snackbar("Item Count", "You Can't Add More");
+      }
+    } else {
+      if(_quantity != 1) {
+        _quantity--;
+      } else {
+        Get.snackbar("Item Count", "You have to order a minimum of 1 Item");
+      }
+    }
+    update();
+  }
+
+  void initProduct(){
+    _quantity = 1;
+  }
 }

@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import '../controller/recommended_food_controller.dart';
 import '../data/repository/recommended_product_repo.dart';
 
-Future<void> init() async{
+void init() {
   //api client
   Get.lazyPut(() => ApiClient(appBaseUrl: AppConstants.BASE_URL));
 
