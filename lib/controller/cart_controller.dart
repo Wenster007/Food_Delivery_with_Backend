@@ -45,5 +45,11 @@ class CartController extends GetxController {
     }
   }
 
-
+  int get getTotalCartItems{
+    int totalQuantity= 0;
+    items.forEach((key, value) {
+      totalQuantity = totalQuantity + value.quantity!;
+    });
+    return totalQuantity;
+  }
 }

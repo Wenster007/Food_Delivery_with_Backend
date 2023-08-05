@@ -6,6 +6,7 @@ import 'package:food_delivery_with_backend/utils/dimensions.dart';
 import 'package:food_delivery_with_backend/widgets/app_icon.dart';
 import 'package:food_delivery_with_backend/widgets/app_name_rating_icons.dart';
 import 'package:food_delivery_with_backend/widgets/expandable_text.dart';
+import 'package:food_delivery_with_backend/widgets/small_text.dart';
 import 'package:get/get.dart';
 
 import '../../controller/cart_controller.dart';
@@ -20,9 +21,7 @@ class PopularFoodDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<PopularProductController>()
-        .initProduct(products);
-
+    Get.find<PopularProductController>().initProduct(products);
 
     return Scaffold(
         body: Container(
@@ -57,9 +56,38 @@ class PopularFoodDetails extends StatelessWidget {
                         Get.back();
                       },
                     ),
-                    AppIcon(
-                      icon: Icons.shopping_cart_outlined,
-                      onTapFunc: () {},
+                    Stack(
+                      children: [
+                        AppIcon(
+                          icon: Icons.shopping_cart_outlined,
+                          onTapFunc: () {},
+                        ),
+                        GetBuilder<PopularProductController>(
+                          builder: (popularProductController) => Positioned(
+                              top: Dimensions.height * 0.006,
+                              right: Dimensions.height * 0.006,
+                              child:
+                                  popularProductController.getTotalCartItems > 0
+                                      ? Container(
+                                          width: Dimensions.height * 0.02,
+                                          height: Dimensions.height * 0.02,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                                Dimensions.height * 0.011),
+                                            color: AppColor.mainColor,
+                                          ),
+                                          alignment: Alignment.center,
+                                          child: SmallText(
+                                            text: popularProductController
+                                                .getTotalCartItems
+                                                .toString(),
+                                            color: Colors.black,
+                                            size: Dimensions.height * 0.015,
+                                          ),
+                                        )
+                                      : Text("")),
+                        )
+                      ],
                     ),
                   ],
                 ),
