@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/controller/popular_product_controller_dart.dart';
 import 'package:food_delivery_with_backend/controller/recommended_food_controller.dart';
 import 'package:food_delivery_with_backend/pages/home/main_food_page.dart';
-import 'package:food_delivery_with_backend/routes/route_helper.dart';
 import 'package:get/get.dart';
 import 'package:food_delivery_with_backend/helper/dependencies.dart' as dep;
 
@@ -20,6 +19,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.find<PopularProductController>().getPopularProductList();
     Get.find<RecommendedProductController>().getRecommendedProductList();
+
+
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,

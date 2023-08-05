@@ -4,7 +4,6 @@ import 'package:food_delivery_with_backend/controller/popular_product_controller
 import 'package:food_delivery_with_backend/controller/recommended_food_controller.dart';
 import 'package:food_delivery_with_backend/pages/food/popular_food_details.dart';
 import 'package:food_delivery_with_backend/pages/food/recommended_food_details.dart';
-import 'package:food_delivery_with_backend/routes/route_helper.dart';
 import 'package:food_delivery_with_backend/utils/app_constants.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
@@ -149,7 +148,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          Get.to(PopularFoodDetails(products: popularProductController.getProductList[index],));
+                          Get.to(()=>
+                              PopularFoodDetails(
+                            products:
+                                popularProductController.getProductList[index],
+                          ));
                         },
                         child: _buildPageItem(index,
                             popularProductController.getProductList[index]),
@@ -163,7 +166,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     child: CircularProgressIndicator(
                       color: AppColor.mainColor,
                     ),
-                  ),);
+                  ),
+                );
         }),
 
         //For displaying the Active Page Dots.
@@ -228,7 +232,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   itemCount: recommendedProductController.getProductList.length,
                   itemBuilder: (context, index) => GestureDetector(
                     onTap: () {
-                      Get.to(RecommendedFoodDetails(products: recommendedProductController.getProductList[index]), transition: Transition.fadeIn);
+                      Get.to(()=>
+                          RecommendedFoodDetails(
+                              products: recommendedProductController
+                                  .getProductList[index]),
+                          transition: Transition.fadeIn);
                     },
                     child: Container(
                       // color: Colors.red,
@@ -244,8 +252,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                             height: Dimensions.height * 0.15,
                             width: Dimensions.height * 0.17,
                             decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.height * 0.01),
+                              borderRadius: BorderRadius.circular(
+                                  Dimensions.height * 0.01),
                               color: index / 2 == 0
                                   ? const Color(0xFF9294cc)
                                   : const Color(0xFF69c5df),

@@ -21,7 +21,7 @@ class RecommendedProductController extends GetxController{
       isLoaded = true;
       update();
     } else {
-
+      print("Could not get recommended products");
     }
   }
 
