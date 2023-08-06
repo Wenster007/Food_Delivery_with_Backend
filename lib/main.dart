@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/controller/popular_product_controller_dart.dart';
 import 'package:food_delivery_with_backend/controller/recommended_food_controller.dart';
+import 'package:food_delivery_with_backend/pages/cart/cart_pages.dart';
 import 'package:food_delivery_with_backend/pages/home/main_food_page.dart';
 import 'package:get/get.dart';
 import 'package:food_delivery_with_backend/helper/dependencies.dart' as dep;

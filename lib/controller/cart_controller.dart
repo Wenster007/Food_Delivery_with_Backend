@@ -52,4 +52,6 @@ class CartController extends GetxController {
     });
     return totalQuantity;
   }
+
+
 }

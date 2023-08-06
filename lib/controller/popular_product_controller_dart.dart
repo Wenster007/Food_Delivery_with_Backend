@@ -58,7 +58,6 @@ class PopularProductController extends GetxController{
 
   void addItem(Products product) {
     _cart.addItem(product, _quantity);
-    Get.snackbar("Added To Cart", "$_quantity items added to cart");
     _quantity = 1;
     update();
     _cart.items.forEach((key, value) {
