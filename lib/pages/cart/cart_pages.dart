@@ -109,6 +109,7 @@ class CartPage extends StatelessWidget {
                                         color: AppColor.signColor,
                                       ),
                                     ),
+
                                     SizedBox(
                                       width: Dimensions.height * 0.01,
                                     ),
