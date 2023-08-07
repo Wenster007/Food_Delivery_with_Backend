@@ -1,3 +1,5 @@
+import 'package:food_delivery_with_backend/models/product_model.dart';
+
 class CartModel {
   int? id;
   String? name;
@@ -6,6 +8,7 @@ class CartModel {
   int? quantity;
   String? time;
   bool? isExit;
+  Products? products;
 
   CartModel({
     this.id,
@@ -15,6 +18,7 @@ class CartModel {
     this.quantity,
     this.time,
     this.isExit,
+    this.products,
   });
 
   // CartModel.fromJson(Map<String, dynamic> json) {

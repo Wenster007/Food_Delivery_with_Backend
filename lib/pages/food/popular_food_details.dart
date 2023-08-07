@@ -56,16 +56,16 @@ class PopularFoodDetails extends StatelessWidget {
                         Get.back();
                       },
                     ),
-                    Stack(
-                      children: [
-                        AppIcon(
-                          icon: Icons.shopping_cart_outlined,
-                          onTapFunc: () {
-                            Get.to(()=>CartPage());
-                          },
-                        ),
-                        GetBuilder<PopularProductController>(
-                          builder: (popularProductController) => Positioned(
+                    GetBuilder<PopularProductController>(
+                      builder: (popularProductController) => Stack(
+                        children: [
+                          AppIcon(
+                            icon: Icons.shopping_cart_outlined,
+                            onTapFunc: () {
+                              Get.to(() => CartPage());
+                            },
+                          ),
+                          Positioned(
                               top: Dimensions.height * 0.006,
                               right: Dimensions.height * 0.006,
                               child:
@@ -88,8 +88,8 @@ class PopularFoodDetails extends StatelessWidget {
                                           ),
                                         )
                                       : Text("")),
-                        )
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),

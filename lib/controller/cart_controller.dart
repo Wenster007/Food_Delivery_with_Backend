@@ -23,6 +23,7 @@ class CartController extends GetxController {
           img: oldProduct.img,
           isExit: true,
           time: DateTime.now().toString(),
+          products: product,
         );
       });
     }
@@ -39,6 +40,7 @@ class CartController extends GetxController {
               img: product.img,
               isExit: true,
               time: DateTime.now().toString(),
+              products: product,
             );
           }
       );
@@ -67,5 +69,15 @@ class CartController extends GetxController {
         update();
       }
     });
+  }
+
+  int get totalAmount{
+    int totalAmount = 0;
+    items.forEach((key, value) {
+      totalAmount = totalAmount + (value.price! * value.quantity!);
+    });
+
+    return totalAmount;
+
   }
 }

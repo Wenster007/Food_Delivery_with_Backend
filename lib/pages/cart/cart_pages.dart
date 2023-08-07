@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_with_backend/controller/popular_product_controller_dart.dart';
+import 'package:food_delivery_with_backend/pages/food/popular_food_details.dart';
+import 'package:food_delivery_with_backend/pages/food/recommended_food_details.dart';
 import 'package:food_delivery_with_backend/utils/app_constants.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
@@ -79,22 +82,35 @@ class CartPage extends StatelessWidget {
                             // color: Colors.red,
                             child: Row(
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(
-                                      Dimensions.height * 0.035),
-                                  child: Container(
-                                    height: Dimensions.height * 0.13,
-                                    width: Dimensions.height * 0.13,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                            "${AppConstants.BASE_URL}/uploads/${itemMap[key]!.img!}",),
+                                GestureDetector(
+                                  onTap: () {
+                                    final int popularIndex = Get.find<PopularProductController>().getProductList.indexOf(itemMap[key]!.products!);
+                                    print(popularIndex);
+                                    if (popularIndex>=0){
+                                      Get.to(()=>PopularFoodDetails(products: itemMap[key]!.products!));
+                                    } else {
+                                      Get.to(()=> RecommendedFoodDetails(products: itemMap[key]!.products!));
+                                    }
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(
+                                        Dimensions.height * 0.035),
+                                    child: Container(
+                                      height: Dimensions.height * 0.13,
+                                      width: Dimensions.height * 0.13,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(
+                                              "${AppConstants.BASE_URL}/uploads/${itemMap[key]!.img!}",),
+                                        ),
+                                        color: Colors.white,
                                       ),
-                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
+
+
                                 SizedBox(
                                   width: Dimensions.width * 0.02,
                                 ),
@@ -112,7 +128,7 @@ class CartPage extends StatelessWidget {
                                         children: [
                                           BigText(
                                             text:
-                                            "\$ ${itemMap[key]!.price! * itemMap[key]!.quantity!}.00",
+                                            "\$ ${itemMap[key]!.price!}.00",
                                             color: Colors.red,
                                           ),
                                           Container(
@@ -179,6 +195,73 @@ class CartPage extends StatelessWidget {
           ),
         ),
       ),
-    );
+
+
+        bottomNavigationBar: GetBuilder<CartController>(
+          builder: (cartController) => Container(
+            height: Dimensions.height * 0.13,
+            padding: EdgeInsets.only(
+              top: Dimensions.height * 0.03,
+              bottom: Dimensions.height * 0.03,
+              left: Dimensions.height * 0.02,
+              right: Dimensions.height * 0.02,
+            ),
+            decoration: BoxDecoration(
+              color: AppColor.buttonBackgroundColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(Dimensions.height * 0.02),
+                topRight: Radius.circular(Dimensions.height * 0.02),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                //for cart items quantity increase decrease.
+                Container(
+                    padding: EdgeInsets.all(Dimensions.height * 0.02),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius:
+                      BorderRadius.circular(Dimensions.height * 0.02),
+                    ),
+                    child: Row(
+                      children: [
+
+                        SizedBox(
+                          width: Dimensions.height * 0.01,
+                        ),
+                        BigText(
+                            text: "\$ ${cartController.totalAmount}"
+                                ),
+                        SizedBox(
+                          width: Dimensions.height * 0.01,
+                        ),
+
+                      ],
+                    )),
+
+                //for the price and AddToCart Button
+                Container(
+                  padding: EdgeInsets.all(Dimensions.height * 0.016),
+                  decoration: BoxDecoration(
+                    borderRadius:
+                    BorderRadius.circular(Dimensions.height * 0.02),
+                    color: AppColor.mainColor,
+                  ),
+                  child: GestureDetector(
+                    onTap: () {
+
+                    },
+                    child: BigText(
+                      text:
+                      " | Add to cart",
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 }
