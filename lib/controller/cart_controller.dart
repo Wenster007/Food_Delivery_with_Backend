@@ -53,5 +53,19 @@ class CartController extends GetxController {
     return totalQuantity;
   }
 
-
+  void quantityIncrementDecrement(int itemKey, bool isIncrement){
+    items.forEach((key, value) {
+      if (key == itemKey){
+        if (isIncrement){
+          value.quantity = value.quantity! + 1;
+        } else {
+          value.quantity = value.quantity! - 1;
+          if (value.quantity == 0){
+            items.remove(key);
+          }
+        }
+        update();
+      }
+    });
+  }
 }
