@@ -6,10 +6,7 @@ import 'package:food_delivery_with_backend/widgets/small_text.dart';
 
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
 
-import 'package:get/get.dart';
 
-import '../../controller/popular_product_controller_dart.dart';
-import '../../controller/recommended_food_controller.dart';
 
 
 class MainFoodPage extends StatefulWidget {
@@ -22,9 +19,6 @@ class MainFoodPage extends StatefulWidget {
 class _MainFoodPageState extends State<MainFoodPage> {
   @override
   Widget build(BuildContext context) {
-
-    Get.find<PopularProductController>().getPopularProductList();
-    Get.find<RecommendedProductController>().getRecommendedProductList();
 
     return Scaffold(
       body: Column(
