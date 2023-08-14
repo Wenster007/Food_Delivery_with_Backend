@@ -10,6 +10,8 @@ class CartController extends GetxController {
 
   Map<int, CartModel> items = {};
 
+  List<CartModel> storageItems = [];
+
   void addItem(Products product, int quantity) {
 
     //if addToCart is clicked and the item already exists it will just add the quantity
@@ -74,6 +76,7 @@ class CartController extends GetxController {
             items.remove(key);
           }
         }
+        cartRepo!.addToCartList(getItemsList());
         update();
       }
     });
@@ -87,5 +90,18 @@ class CartController extends GetxController {
 
     return totalAmount;
 
+  }
+
+  List<CartModel> getCartData() {
+    setCart = cartRepo!.getCartList();
+    return storageItems;
+  }
+
+  set setCart(List<CartModel> item){
+    storageItems = item;
+
+    for (int i=0; i<storageItems.length ; i++) {
+      items.putIfAbsent(storageItems[i].products!.id!, () => storageItems[i]);
+    }
   }
 }

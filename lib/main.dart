@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_with_backend/controller/cart_controller.dart';
 import 'package:food_delivery_with_backend/pages/splash/splash_screen.dart';
 import 'package:get/get.dart';
 import 'package:food_delivery_with_backend/helper/dependencies.dart' as dep;
@@ -18,7 +19,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,

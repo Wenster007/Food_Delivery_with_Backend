@@ -23,7 +23,9 @@ class PopularFoodDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.find<PopularProductController>().initProduct(products);
-    Get.find<PopularProductController>().addCartController(Get.find<CartController>());
+    Get.find<PopularProductController>()
+        .addCartController(Get.find<CartController>());
+
 
     return Scaffold(
         body: Container(
@@ -65,14 +67,13 @@ class PopularFoodDetails extends StatelessWidget {
                             icon: Icons.shopping_cart_outlined,
                             onTapFunc: () {
                               Get.to(() => CartPage());
-
                             },
                           ),
                           Positioned(
                               top: Dimensions.height * 0.006,
                               right: Dimensions.height * 0.006,
                               child:
-                              popularProductController.getTotalCartItems > 0
+                                  popularProductController.getTotalCartItems > 0
                                       ? Container(
                                           width: Dimensions.height * 0.02,
                                           height: Dimensions.height * 0.02,

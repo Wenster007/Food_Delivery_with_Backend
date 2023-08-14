@@ -19,8 +19,6 @@ class CartRepo{
     sharedPreferences!.setStringList(AppConstants.CART_LIST, cart);
     print("Added to shared Preferences");
     print(sharedPreferences!.getStringList(AppConstants.CART_LIST));
-    print("\n\n");
-    getCartList();
   }
 
 

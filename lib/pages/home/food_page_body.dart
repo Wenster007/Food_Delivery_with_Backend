@@ -335,7 +335,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   ),
                 )
               : SizedBox(
-                  height: Dimensions.height * 0.3,
+                  height: Dimensions.height * 0.18,
                   child: const Center(
                     child: CircularProgressIndicator(
                       color: AppColor.mainColor,

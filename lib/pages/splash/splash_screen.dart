@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen>
     _loadResources();
     animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 4),
     )..forward();
 
     animation =
@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen>
 
 
     Timer(
-      const Duration(seconds: 4),
+      const Duration(seconds: 5),
       () => Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => const HomePage(),
       )),

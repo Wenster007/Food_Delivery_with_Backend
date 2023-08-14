@@ -6,6 +6,9 @@ import 'package:food_delivery_with_backend/widgets/small_text.dart';
 
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
 
+import '../../controller/cart_controller.dart';
+import 'package:get/get.dart';
+
 class MainFoodPage extends StatefulWidget {
   const MainFoodPage({Key? key}) : super(key: key);
 
@@ -16,6 +19,8 @@ class MainFoodPage extends StatefulWidget {
 class _MainFoodPageState extends State<MainFoodPage> {
   @override
   Widget build(BuildContext context) {
+    Get.find<CartController>().getCartData();
+
     return Scaffold(
       body: Column(
         children: [
