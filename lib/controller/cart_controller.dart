@@ -4,9 +4,9 @@ import 'package:food_delivery_with_backend/models/product_model.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
-  final CartRepo cartRepo;
+  final CartRepo? cartRepo;
 
-  CartController({required this.cartRepo});
+  CartController(this.cartRepo);
 
   Map<int, CartModel> items = {};
 
@@ -21,7 +21,7 @@ class CartController extends GetxController {
           price: oldProduct.price,
           quantity: oldProduct.quantity! + quantity,
           img: oldProduct.img,
-          isExit: true,
+          isExist: true,
           time: DateTime.now().toString(),
           products: product,
         );
@@ -38,13 +38,18 @@ class CartController extends GetxController {
               price: product.price,
               quantity: quantity,
               img: product.img,
-              isExit: true,
+              isExist: true,
               time: DateTime.now().toString(),
               products: product,
             );
           }
       );
     }
+    cartRepo!.addToCartList(getItemsList());
+  }
+
+  List<CartModel> getItemsList() {
+    return items.entries.map((e) => e.value).toList();
   }
 
   int get getTotalCartItems{
@@ -52,8 +57,11 @@ class CartController extends GetxController {
     items.forEach((key, value) {
       totalQuantity = totalQuantity + value.quantity!;
     });
+    update();
     return totalQuantity;
   }
+
+
 
   void quantityIncrementDecrement(int itemKey, bool isIncrement){
     items.forEach((key, value) {

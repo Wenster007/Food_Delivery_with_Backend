@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/pages/splash/splash_screen.dart';
 import 'package:get/get.dart';
 import 'package:food_delivery_with_backend/helper/dependencies.dart' as dep;
+import 'package:food_delivery_with_backend/helper/dependencies2.dart' as dep2;
 
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   dep.init();
+  dep2.init();
   runApp(const MyApp());
 }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/controller/popular_product_controller_dart.dart';
 import 'package:food_delivery_with_backend/pages/food/popular_food_details.dart';
 import 'package:food_delivery_with_backend/pages/food/recommended_food_details.dart';
+import 'package:food_delivery_with_backend/pages/home/home_page.dart';
 import 'package:food_delivery_with_backend/utils/app_constants.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
@@ -47,7 +48,7 @@ class CartPage extends StatelessWidget {
                       AppIcon(
                         icon: Icons.home_outlined,
                         onTapFunc: () {
-                          Get.offAll(()=> const MainFoodPage());
+                          Get.offAll(()=> const HomePage());
                         },
                         backgroundColor: AppColor.mainColor,
                         iconColor: Colors.white,

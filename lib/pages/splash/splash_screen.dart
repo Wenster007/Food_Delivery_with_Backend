@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/pages/home/home_page.dart';
+import 'package:food_delivery_with_backend/utils/dimensions.dart';
 import 'package:get/get.dart';
 
 import '../../controller/popular_product_controller_dart.dart';
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen>
   late Animation<double> animation;
   late AnimationController animationController;
 
-  _loadResources() async{
+  _loadResources() async {
     await Get.find<PopularProductController>().getPopularProductList();
     await Get.find<RecommendedProductController>().getRecommendedProductList();
   }
@@ -56,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen>
           child: Center(
               child: Image.asset(
             "assets/images/logo.png",
-            width: 250,
+            width: Dimensions.height * 0.28,
           ))),
     );
   }

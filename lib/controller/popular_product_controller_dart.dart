@@ -17,7 +17,7 @@ class PopularProductController extends GetxController{
   int _cartItem = 0;
   int get getCartItem => _cartItem + getQuantity;
 
-  final CartController _cart = Get.find<CartController>();
+  late CartController _cart;
 
 
   Future<void> getPopularProductList() async{
@@ -64,6 +64,10 @@ class PopularProductController extends GetxController{
     _cart.items.forEach((key, value) {
       print("${value.name} has quantity ${value.quantity}");
     });
+  }
+
+  void addCartController(CartController cartController) {
+    _cart = cartController;
   }
 
   int get getTotalCartItems{
