@@ -13,10 +13,13 @@ import 'package:food_delivery_with_backend/widgets/small_text.dart';
 import 'package:get/get.dart';
 
 import '../../controller/cart_controller.dart';
-import '../home/main_food_page.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage({Key? key, required this.cameFromProduct, required this.cameFromPopularProduct}) : super(key: key);
+  const CartPage(
+      {Key? key,
+      required this.cameFromProduct,
+      required this.cameFromPopularProduct})
+      : super(key: key);
 
   final Products cameFromProduct;
   final bool cameFromPopularProduct;
@@ -42,10 +45,12 @@ class CartPage extends StatelessWidget {
                     AppIcon(
                       icon: Icons.arrow_back_ios_new_outlined,
                       onTapFunc: () {
-                        if(cameFromPopularProduct) {
-                          Get.off(()=> PopularFoodDetails(products: cameFromProduct));
+                        if (cameFromPopularProduct) {
+                          Get.off(() =>
+                              PopularFoodDetails(products: cameFromProduct));
                         } else {
-                          Get.off(()=>RecommendedFoodDetails(products: cameFromProduct));
+                          Get.off(() => RecommendedFoodDetails(
+                              products: cameFromProduct));
                         }
                       },
                       backgroundColor: AppColor.mainColor,
@@ -82,7 +87,7 @@ class CartPage extends StatelessWidget {
                 //Cart Items List
                 Expanded(
                     child: GetBuilder<CartController>(
-                  builder: (cartController) => itemMap.isNotEmpty
+                  builder: (cartController) => Get.find<CartController>().items.isNotEmpty
                       ? ListView.builder(
                           itemCount: itemMap.length,
                           itemBuilder: (context, index) {
@@ -251,7 +256,6 @@ class CartPage extends StatelessWidget {
                       ],
                     )),
 
-                //for the price and AddToCart Button
                 Container(
                   padding: EdgeInsets.all(Dimensions.height * 0.016),
                   decoration: BoxDecoration(
@@ -260,9 +264,11 @@ class CartPage extends StatelessWidget {
                     color: AppColor.mainColor,
                   ),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      cartController.addToHistory();
+                    },
                     child: BigText(
-                      text: " | Add to cart",
+                      text: " Add to cart",
                       color: Colors.white,
                     ),
                   ),
