@@ -13,6 +13,8 @@ class CartRepo{
 
   //this is used for adding the items to sharedPreferences cart-list
   void addToCartList(List<CartModel> listOfCartProducts) {
+    // sharedPreferences!.remove(AppConstants.CART_LIST);
+    // sharedPreferences!.remove(AppConstants.CART_HISTORY_LIST);
     cart=[];
 
     listOfCartProducts.forEach((element) {
@@ -43,11 +45,33 @@ class CartRepo{
 
   //for adding items into order CartHistoryList
   void addToCartHistoryList() {
+    if (sharedPreferences!.containsKey(AppConstants.CART_HISTORY_LIST)){
+      cartHistory = sharedPreferences!.getStringList(AppConstants.CART_HISTORY_LIST)!;
+    }
+
     for (int i=0; i<cart.length; i++){
       cartHistory.add(cart[i]);
     }
 
+    cart = [];
     sharedPreferences!.remove(AppConstants.CART_LIST);
     sharedPreferences!.setStringList(AppConstants.CART_HISTORY_LIST, cartHistory);
+  }
+
+
+  //for getting data from the CartHistoryList
+  List<CartModel> getCartHistoryList() {
+    if (sharedPreferences!.containsKey(AppConstants.CART_HISTORY_LIST)){
+     cartHistory = [];
+     cartHistory = sharedPreferences!.getStringList(AppConstants.CART_HISTORY_LIST)!;
+    }
+
+    List<CartModel> cartListHistory = [];
+
+    cartHistory.forEach((element) {
+      cartListHistory.add(CartModel.fromJson(jsonDecode(element)));
+    });
+
+    return cartListHistory;
   }
 }
