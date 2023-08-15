@@ -3,6 +3,7 @@ import 'package:food_delivery_with_backend/controller/cart_controller.dart';
 import 'package:food_delivery_with_backend/controller/popular_product_controller_dart.dart';
 import 'package:food_delivery_with_backend/models/product_model.dart';
 import 'package:food_delivery_with_backend/pages/cart/cart_pages.dart';
+import 'package:food_delivery_with_backend/pages/home/home_page.dart';
 import 'package:food_delivery_with_backend/utils/app_constants.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
 import 'package:food_delivery_with_backend/widgets/app_icon.dart';
@@ -66,7 +67,7 @@ class PopularFoodDetails extends StatelessWidget {
                           AppIcon(
                             icon: Icons.shopping_cart_outlined,
                             onTapFunc: () {
-                              Get.to(() => CartPage());
+                              Get.off(() => CartPage(cameFromPopularProduct: true, cameFromProduct: products,));
                             },
                           ),
                           Positioned(

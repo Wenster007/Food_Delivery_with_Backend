@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/controller/popular_product_controller_dart.dart';
+import 'package:food_delivery_with_backend/models/product_model.dart';
 import 'package:food_delivery_with_backend/pages/food/popular_food_details.dart';
 import 'package:food_delivery_with_backend/pages/food/recommended_food_details.dart';
 import 'package:food_delivery_with_backend/pages/home/home_page.dart';
@@ -15,7 +16,10 @@ import '../../controller/cart_controller.dart';
 import '../home/main_food_page.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage({Key? key}) : super(key: key);
+  const CartPage({Key? key, required this.cameFromProduct, required this.cameFromPopularProduct}) : super(key: key);
+
+  final Products cameFromProduct;
+  final bool cameFromPopularProduct;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +42,11 @@ class CartPage extends StatelessWidget {
                     AppIcon(
                       icon: Icons.arrow_back_ios_new_outlined,
                       onTapFunc: () {
-                        Get.back();
+                        if(cameFromPopularProduct) {
+                          Get.off(()=> PopularFoodDetails(products: cameFromProduct));
+                        } else {
+                          Get.off(()=>RecommendedFoodDetails(products: cameFromProduct));
+                        }
                       },
                       backgroundColor: AppColor.mainColor,
                       iconColor: Colors.white,

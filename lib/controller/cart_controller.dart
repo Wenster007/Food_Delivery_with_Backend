@@ -59,7 +59,6 @@ class CartController extends GetxController {
     items.forEach((key, value) {
       totalQuantity = totalQuantity + value.quantity!;
     });
-    update();
     return totalQuantity;
   }
 
@@ -89,7 +88,6 @@ class CartController extends GetxController {
     });
 
     return totalAmount;
-
   }
 
   List<CartModel> getCartData() {

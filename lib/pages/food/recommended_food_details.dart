@@ -40,7 +40,10 @@ class RecommendedFoodDetails extends StatelessWidget {
                     AppIcon(
                       icon: Icons.shopping_cart_outlined,
                       onTapFunc: () {
-                        Get.to(()=> const CartPage());
+                        Get.off(() => CartPage(
+                              cameFromProduct: products,
+                              cameFromPopularProduct: false,
+                            ));
                       },
                     ),
                     GetBuilder<RecommendedProductController>(
