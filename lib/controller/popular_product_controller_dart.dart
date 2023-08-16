@@ -62,7 +62,6 @@ class PopularProductController extends GetxController{
     _quantity = 1;
     update();
     _cart.items.forEach((key, value) {
-      print("${value.name} has quantity ${value.quantity}");
     });
   }
 

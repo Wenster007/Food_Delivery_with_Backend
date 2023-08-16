@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_with_backend/controller/order_controller.dart';
 import 'package:food_delivery_with_backend/controller/popular_product_controller_dart.dart';
 import 'package:food_delivery_with_backend/models/product_model.dart';
 import 'package:food_delivery_with_backend/pages/food/popular_food_details.dart';
@@ -266,6 +267,7 @@ class CartPage extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       cartController.addToHistory();
+                      Get.find<OrderController>().addOrderHistory();
                     },
                     child: BigText(
                       text: " Add to cart",

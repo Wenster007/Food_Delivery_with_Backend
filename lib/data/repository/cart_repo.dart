@@ -45,26 +45,27 @@ class CartRepo{
 
   //for adding items into order CartHistoryList
   void addToCartHistoryList() {
-    if (sharedPreferences!.containsKey(AppConstants.CART_HISTORY_LIST)){
-      cartHistory = sharedPreferences!.getStringList(AppConstants.CART_HISTORY_LIST)!;
-    }
+    // if (sharedPreferences!.containsKey(AppConstants.CART_HISTORY_LIST)){
+    //   cartHistory = sharedPreferences!.getStringList(AppConstants.CART_HISTORY_LIST)!;
+    // }
 
+    cartHistory = [];
     for (int i=0; i<cart.length; i++){
       cartHistory.add(cart[i]);
     }
 
     cart = [];
     sharedPreferences!.remove(AppConstants.CART_LIST);
-    sharedPreferences!.setStringList(AppConstants.CART_HISTORY_LIST, cartHistory);
+    // sharedPreferences!.setStringList(AppConstants.CART_HISTORY_LIST, cartHistory);
   }
 
 
   //for getting data from the CartHistoryList
   List<CartModel> getCartHistoryList() {
-    if (sharedPreferences!.containsKey(AppConstants.CART_HISTORY_LIST)){
-     cartHistory = [];
-     cartHistory = sharedPreferences!.getStringList(AppConstants.CART_HISTORY_LIST)!;
-    }
+    // if (sharedPreferences!.containsKey(AppConstants.CART_HISTORY_LIST)){
+    //  cartHistory = [];
+    //  cartHistory = sharedPreferences!.getStringList(AppConstants.CART_HISTORY_LIST)!;
+    // }
 
     List<CartModel> cartListHistory = [];
 

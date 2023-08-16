@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_with_backend/controller/cart_controller.dart';
 import 'package:food_delivery_with_backend/pages/splash/splash_screen.dart';
 import 'package:get/get.dart';
 import 'package:food_delivery_with_backend/helper/dependencies.dart' as dep;
@@ -29,6 +28,9 @@ class MyApp extends StatelessWidget {
       home: const SplashScreen(),
       // getPages: RouteHelper.routes,
     );
+    // return GetBuilder<OrderController>(builder: (_) {
+    //
+    // });
   }
 }
 

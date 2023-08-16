@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_with_backend/pages/cart/order_history.dart';
 import 'package:food_delivery_with_backend/pages/home/main_food_page.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
@@ -19,11 +20,7 @@ class _HomePageState extends State<HomePage> {
         child: Text("1"),
       ),
     ),
-    Container(
-      child: const Center(
-        child: Text("2"),
-      ),
-    ),
+    OrderHistory(),
     Container(
       child: const Center(
         child: Text("3"),

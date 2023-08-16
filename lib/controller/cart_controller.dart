@@ -88,7 +88,7 @@ class CartController extends GetxController {
     return totalAmount;
   }
 
-  //for loading the data from sharedPreferences when the app is reExecuted.--------------------------------------
+  //for loading the cart data from sharedPreferences when the app is reExecuted.--------------------------------------
   List<CartModel> getCartData() {
     setCart = cartRepo!.getCartList();
     return storageItems;
