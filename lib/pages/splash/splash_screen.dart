@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import '../../controller/popular_product_controller_dart.dart';
 import '../../controller/recommended_food_controller.dart';
 
+import "package:food_delivery_with_backend/helper/dependencies3.dart" as dep3;
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -24,6 +26,7 @@ class _SplashScreenState extends State<SplashScreen>
   _loadResources() async {
     await Get.find<PopularProductController>().getPopularProductList();
     await Get.find<RecommendedProductController>().getRecommendedProductList();
+    dep3.init();
   }
 
   @override
