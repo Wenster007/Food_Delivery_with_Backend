@@ -26,7 +26,6 @@ class _HomePageState extends State<HomePage> {
         child: Text("3"),
       ),
     ),
-
   ];
 
   final List<PersistentBottomNavBarItem> _navBarsItems = [

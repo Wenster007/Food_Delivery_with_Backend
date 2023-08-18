@@ -13,8 +13,7 @@ class CartRepo{
 
   //this is used for adding the items to sharedPreferences cart-list
   void addToCartList(List<CartModel> listOfCartProducts) {
-    // sharedPreferences!.remove(AppConstants.CART_LIST);
-    // sharedPreferences!.remove(AppConstants.CART_HISTORY_LIST);
+    print("2 adding cart data to shard preferences");
     cart=[];
 
     listOfCartProducts.forEach((element) {
@@ -27,6 +26,7 @@ class CartRepo{
 
   //this is used for getting the items from sharedPreferences cart-list.
   List<CartModel> getCartList() {
+    print("3 getting cart data from shared Preferences");
     List<String> carts = [];
 
     if(sharedPreferences!.containsKey(AppConstants.CART_LIST)){
@@ -45,27 +45,19 @@ class CartRepo{
 
   //for adding items into order CartHistoryList
   void addToCartHistoryList() {
-    // if (sharedPreferences!.containsKey(AppConstants.CART_HISTORY_LIST)){
-    //   cartHistory = sharedPreferences!.getStringList(AppConstants.CART_HISTORY_LIST)!;
-    // }
-
+    print("4 adding to cart history list");
     cartHistory = [];
-    for (int i=0; i<cart.length; i++){
-      cartHistory.add(cart[i]);
-    }
+    cartHistory = sharedPreferences!.getStringList(AppConstants.CART_LIST)!;
+
 
     cart = [];
     sharedPreferences!.remove(AppConstants.CART_LIST);
-    // sharedPreferences!.setStringList(AppConstants.CART_HISTORY_LIST, cartHistory);
   }
 
 
   //for getting data from the CartHistoryList
   List<CartModel> getCartHistoryList() {
-    // if (sharedPreferences!.containsKey(AppConstants.CART_HISTORY_LIST)){
-    //  cartHistory = [];
-    //  cartHistory = sharedPreferences!.getStringList(AppConstants.CART_HISTORY_LIST)!;
-    // }
+    print("5 getting from carthistorylist from shared preferences");
 
     List<CartModel> cartListHistory = [];
 

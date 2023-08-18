@@ -15,6 +15,7 @@ class OrderRepo {
 
 
   void addOrderToSharedPreferences() {
+    print("6 add Order to shared Preferences");
     listOfOrders.add(Order(
         orderItems: cartRepo.getCartHistoryList(),
         time: DateTime.now().toString()));
@@ -33,6 +34,7 @@ class OrderRepo {
 
 
   List<Order> getListOfOrders() {
+    print("7 get order from shared preferences");
     if (cartRepo.sharedPreferences!
         .containsKey(AppConstants.ORDER_HISTORY_LIST)) {
       listOfOrdersSharedPreferences = [];

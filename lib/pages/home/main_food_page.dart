@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_with_backend/controller/order_controller.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/pages/home/food_page_body.dart';
 import 'package:food_delivery_with_backend/widgets/big_text.dart';
@@ -20,7 +21,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
   @override
   Widget build(BuildContext context) {
     Get.find<CartController>().getCartData();
-
+    Get.find<OrderController>().getListOfOrders();
     return Scaffold(
       body: Column(
         children: [
