@@ -10,6 +10,7 @@ import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
 import 'package:food_delivery_with_backend/widgets/app_icon.dart';
 import 'package:food_delivery_with_backend/widgets/big_text.dart';
+import 'package:food_delivery_with_backend/widgets/empty_cart.dart';
 import 'package:food_delivery_with_backend/widgets/small_text.dart';
 import 'package:get/get.dart';
 
@@ -210,9 +211,7 @@ class CartPage extends StatelessWidget {
                               ),
                             );
                           })
-                      : const Center(
-                          child: Text("No Items In the Cart"),
-                        ),
+                      : EmptyCart(),
                 ))
               ],
             ),

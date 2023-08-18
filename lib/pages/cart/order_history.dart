@@ -3,6 +3,7 @@ import 'package:food_delivery_with_backend/controller/order_controller.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
 import 'package:food_delivery_with_backend/widgets/app_icon.dart';
+import 'package:food_delivery_with_backend/widgets/empty_cart.dart';
 import 'package:food_delivery_with_backend/widgets/order_item.dart';
 import 'package:get/get.dart';
 
@@ -34,7 +35,7 @@ class OrderHistory extends StatelessWidget {
               ),
             ),
           ),
-          GetBuilder<OrderController>(
+          Get.find<OrderController>().getListOfOrders().isNotEmpty?GetBuilder<OrderController>(
             builder: (orderController) {
               return Expanded(
                 child: ListView.builder(
@@ -46,7 +47,7 @@ class OrderHistory extends StatelessWidget {
                 ),
               );
             },
-          ),
+          ):Expanded(child: EmptyCart()),
         ],
       ),
     );
