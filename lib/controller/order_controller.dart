@@ -1,6 +1,7 @@
 import 'package:food_delivery_with_backend/data/repository/order_repo.dart';
 import 'package:get/get.dart';
 
+import '../models/cart_model.dart';
 import '../models/order_model.dart';
 
 class OrderController extends GetxController{
@@ -30,6 +31,16 @@ class OrderController extends GetxController{
 
   //for converting map into list.
   List<Order> get listOfTotalOrders {
-    return mapOfOrders.entries.map((e) => e.value).toList();
+    return mapOfOrders.entries.map((e) => e.value).toList().reversed.toList();
+  }
+
+  //for calculating the total amount of each order
+  int getTotalOrderAmount(List<CartModel> listOfOrders){
+    int total = 0;
+
+    listOfOrders.forEach((element) {
+      total = total + (element.price!*element.quantity!.toInt());
+    });
+    return total;
   }
 }

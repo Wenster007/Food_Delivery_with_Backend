@@ -266,6 +266,10 @@ class CartPage extends StatelessWidget {
                   ),
                   child: GestureDetector(
                     onTap: () {
+                      if (cartController.totalAmount<1){
+                        Get.snackbar("No Items in Cart", "Add atleast 1 item in cart to place an order.");
+                        return;
+                      }
                       cartController.addToHistory();
                       Get.find<OrderController>().addOrderHistory();
                     },

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/models/order_model.dart';
+import 'package:food_delivery_with_backend/pages/cart/see_order_details.dart';
 import 'package:food_delivery_with_backend/utils/app_constants.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:food_delivery_with_backend/widgets/small_text.dart';
 
@@ -83,18 +85,23 @@ class OrderItem extends StatelessWidget {
                       SizedBox(
                         height: Dimensions.height * 0.005,
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            vertical: Dimensions.height * 0.005,
-                            horizontal: Dimensions.height * 0.005),
-                        decoration: BoxDecoration(
-                            border:
-                                Border.all(color: AppColor.mainColor, width: 2),
-                            borderRadius: BorderRadius.circular(
-                                Dimensions.height * 0.01)),
-                        child: Text(
-                          "See Details",
-                          style: TextStyle(fontSize: Dimensions.height * 0.015),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(()=>SeeOrderDetails(listOfOrderItems: order.orderItems!,));
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: Dimensions.height * 0.005,
+                              horizontal: Dimensions.height * 0.005),
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: AppColor.mainColor, width: 2),
+                              borderRadius: BorderRadius.circular(
+                                  Dimensions.height * 0.01)),
+                          child: Text(
+                            "See Details",
+                            style: TextStyle(fontSize: Dimensions.height * 0.015),
+                          ),
                         ),
                       )
                     ],
