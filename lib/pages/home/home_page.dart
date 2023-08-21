@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/pages/cart/order_history.dart';
 import 'package:food_delivery_with_backend/pages/home/main_food_page.dart';
+import 'package:food_delivery_with_backend/pages/login/sign_up_page.dart';
+import 'package:food_delivery_with_backend/pages/profile/profile_page.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -15,17 +17,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Widget> pages = [
     const MainFoodPage(),
-    Container(
-      child: const Center(
-        child: Text("1"),
-      ),
-    ),
-    OrderHistory(),
-    Container(
-      child: const Center(
-        child: Text("3"),
-      ),
-    ),
+    const SignUpPage(),
+    const OrderHistory(),
+    const ProfilePage(),
   ];
 
   final List<PersistentBottomNavBarItem> _navBarsItems = [

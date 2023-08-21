@@ -24,12 +24,12 @@ class OrderHistory extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  BigText(text: "Order History", ),
+                  BigText(text: "Order History", color: Colors.white,),
                   AppIcon(
                     icon: Icons.shopping_cart_outlined,
                     onTapFunc: () {},
                     backgroundColor: AppColor.mainColor,
-                    iconColor: Colors.white,
+                    iconColor: Colors.black38,
                   )
                 ],
               ),
