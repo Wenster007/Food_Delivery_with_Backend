@@ -34,9 +34,10 @@ class CustomTextField extends StatelessWidget {
         obscureText: isHiddenPass,
         controller: controller,
         decoration: InputDecoration(
-          label: Text(labelText),
+          hintText: labelText,
+          hintStyle: const TextStyle(color: Colors.grey),
           prefixIcon: Icon(icon),
-          prefixIconColor: AppColor.yellowColor,
+          prefixIconColor: AppColor.mainColor,
           border: InputBorder.none,
         ),
       ),

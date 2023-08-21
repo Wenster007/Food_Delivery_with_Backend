@@ -45,7 +45,7 @@ class ProfileDetailItems extends StatelessWidget {
             SizedBox(
               width: Dimensions.height * 0.02,
             ),
-            BigText(text: text),
+            BigText(text: text, color: Colors.black54,),
           ],
         ),
       ),

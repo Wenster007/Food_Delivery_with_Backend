@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/pages/cart/order_history.dart';
 import 'package:food_delivery_with_backend/pages/home/main_food_page.dart';
-import 'package:food_delivery_with_backend/pages/login/sign_up_page.dart';
 import 'package:food_delivery_with_backend/pages/profile/profile_page.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
@@ -17,7 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Widget> pages = [
     const MainFoodPage(),
-    const SignUpPage(),
+    Center(child: Text("1"),),
     const OrderHistory(),
     const ProfilePage(),
   ];
