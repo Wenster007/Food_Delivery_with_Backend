@@ -4,12 +4,13 @@ import '../utils/colors.dart';
 import '../utils/dimensions.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({Key? key, required this.controller, required this.labelText, this.isHiddenPass = false, required this.icon}) : super(key: key);
+  const CustomTextField({Key? key, required this.controller, required this.labelText, this.isHiddenPass = false, required this.icon, required this.validator}) : super(key: key);
 
   final TextEditingController controller;
   final IconData icon;
   final String labelText;
   final bool isHiddenPass;
+  final String? Function(String? value) validator;
 
 
 
@@ -30,7 +31,8 @@ class CustomTextField extends StatelessWidget {
               blurStyle: BlurStyle.outer)
         ],
       ),
-      child: TextField(
+      child: TextFormField(
+        autofocus: false,
         obscureText: isHiddenPass,
         controller: controller,
         decoration: InputDecoration(
@@ -40,6 +42,8 @@ class CustomTextField extends StatelessWidget {
           prefixIconColor: AppColor.mainColor,
           border: InputBorder.none,
         ),
+        validator: validator,
+
       ),
     );
   }

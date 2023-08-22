@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food_delivery_with_backend/controller/cart_controller.dart';
 import 'package:food_delivery_with_backend/controller/popular_product_controller_dart.dart';
+import 'package:food_delivery_with_backend/controller/user_controller.dart';
 import 'package:food_delivery_with_backend/data/api/api_client.dart';
 import 'package:food_delivery_with_backend/data/repository/cart_repo.dart';
 import 'package:food_delivery_with_backend/data/repository/popular_product_repo.dart';
+import 'package:food_delivery_with_backend/data/repository/user_repo.dart';
 import 'package:food_delivery_with_backend/utils/app_constants.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,4 +24,6 @@ void init() async{
   //repository
   Get.lazyPut(() => PopularProductController(popularProductRepo: Get.find<PopularProductRepo>()));
   Get.lazyPut(() => RecommendedProductController(recommendedProductRepo: Get.find<RecommendedProductRepo>()));
+
+
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_with_backend/controller/user_controller.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
 import 'package:food_delivery_with_backend/widgets/big_text.dart';
@@ -11,6 +12,7 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     final emailController = TextEditingController();
     final passController = TextEditingController();
     final nameController = TextEditingController();
@@ -38,53 +40,113 @@ class SignUpPage extends StatelessWidget {
             SizedBox(
               height: Dimensions.height * 0.03,
             ),
-            CustomTextField(
-              controller: nameController,
-              labelText: "Name",
-              icon: Icons.person,
-            ),
-            SizedBox(
-              height: Dimensions.height * 0.04,
-            ),
-            CustomTextField(
-              controller: emailController,
-              labelText: "Email",
-              icon: Icons.mail,
-            ),
-            SizedBox(
-              height: Dimensions.height * 0.04,
-            ),
-            CustomTextField(
-              controller: phoneController,
-              labelText: "Phone",
-              icon: Icons.phone,
-            ),
-            SizedBox(
-              height: Dimensions.height * 0.04,
-            ),
-            CustomTextField(
-              controller: passController,
-              labelText: "Password",
-              isHiddenPass: true,
-              icon: Icons.key,
-            ),
-            SizedBox(
-              height: Dimensions.height * 0.05,
-            ),
-            Container(
-              width: Dimensions.height * 0.26,
-              height: Dimensions.height * 0.08,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.height * 0.15),
-                color: AppColor.mainColor,
+
+            //Text Input Form
+            Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  CustomTextField(
+                    controller: nameController,
+                    labelText: "Name",
+                    icon: Icons.person,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "     Enter Name";
+                      }
+
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: Dimensions.height * 0.04,
+                  ),
+                  CustomTextField(
+                    controller: emailController,
+                    labelText: "Email",
+                    icon: Icons.mail,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "     Enter Email";
+                      }
+
+                      bool isEmailValid(String email) {
+                        const pattern =
+                            r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$';
+                        final regex = RegExp(pattern);
+                        return regex.hasMatch(email);
+                      }
+
+                      if (!isEmailValid(value)) {
+                        return "     Incorrect Email Format";
+                      }
+
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: Dimensions.height * 0.04,
+                  ),
+                  CustomTextField(
+                    controller: phoneController,
+                    labelText: "Phone",
+                    icon: Icons.phone,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "     Enter Phone Number";
+                      }
+
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: Dimensions.height * 0.04,
+                  ),
+                  CustomTextField(
+                    controller: passController,
+                    labelText: "Password",
+                    isHiddenPass: true,
+                    icon: Icons.key,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "     Enter Password";
+                      }
+
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: Dimensions.height * 0.05,
+                  ),
+                ],
               ),
-              alignment: Alignment.center,
-              child: BigText(
-                text: "Sign Up",
-                color: Colors.white,
-                size: Dimensions.height * 0.027,
+            ),
+
+            GestureDetector(
+              onTap: () {
+                if (formKey.currentState!.validate()) {
+                  Get.find<UserController>().createUser(
+                      emailController.text.toString(),
+                      passController.text.toString());
+                }
+              },
+              child: Container(
+                width: Dimensions.height * 0.26,
+                height: Dimensions.height * 0.08,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.height * 0.15),
+                  color: AppColor.mainColor,
+                ),
+                alignment: Alignment.center,
+                child: BigText(
+                  text: "Sign Up",
+                  color: Colors.white,
+                  size: Dimensions.height * 0.027,
+                ),
               ),
             ),
+
+
             SizedBox(
               height: Dimensions.height * 0.01,
             ),

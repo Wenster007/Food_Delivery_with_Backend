@@ -49,36 +49,6 @@ class _HomePageState extends State<HomePage> {
 
   ];
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     body: pages[activePage],
-  //     bottomNavigationBar: BottomNavigationBar(
-  //       selectedItemColor: AppColor.mainColor,
-  //       unselectedItemColor: AppColor.yellowColor,
-  //       showSelectedLabels: false,
-  //       showUnselectedLabels: false,
-  //       currentIndex: activePage,
-  //
-  //       onTap: (index) {
-  //         setState(() {
-  //           activePage = index;
-  //         });
-  //       },
-  //       items: const [
-  //         BottomNavigationBarItem(
-  //             icon: Icon(Icons.home_outlined), label: "Home"),
-  //         BottomNavigationBarItem(
-  //             icon: Icon(Icons.archive_outlined), label: "History"),
-  //         BottomNavigationBarItem(
-  //             icon: Icon(Icons.shopping_cart_outlined), label: "Cart"),
-  //         BottomNavigationBarItem(
-  //             icon: Icon(Icons.person_outline_sharp), label: "Me"),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     PersistentTabController _controller =

@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_with_backend/controller/user_controller.dart';
 import 'package:food_delivery_with_backend/pages/login/sign_up_page.dart';
 
 import '../../utils/colors.dart';
@@ -14,8 +15,10 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     final emailController = TextEditingController();
     final passController = TextEditingController();
+
     return Scaffold(
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -66,23 +69,59 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               height: Dimensions.height * 0.04,
             ),
-            CustomTextField(
-              controller: emailController,
-              labelText: "Email",
-              icon: Icons.mail,
+
+            //TextInput Form
+            Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  CustomTextField(
+                    controller: emailController,
+                    labelText: "Email",
+                    icon: Icons.mail,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "     Enter Email";
+                      }
+
+                      bool isEmailValid(String email) {
+                        const pattern =
+                            r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$';
+                        final regex = RegExp(pattern);
+                        return regex.hasMatch(email);
+                      }
+
+                      if (!isEmailValid(value)) {
+                        return "     Incorrect Email Format";
+                      }
+
+
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: Dimensions.height * 0.04,
+                  ),
+                  CustomTextField(
+                    controller: passController,
+                    labelText: "Password",
+                    isHiddenPass: true,
+                    icon: Icons.key,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "     Enter Password";
+                      }
+
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: Dimensions.height * 0.025,
+                  ),
+                ],
+              ),
             ),
-            SizedBox(
-              height: Dimensions.height * 0.04,
-            ),
-            CustomTextField(
-              controller: passController,
-              labelText: "Password",
-              isHiddenPass: true,
-              icon: Icons.key,
-            ),
-            SizedBox(
-              height: Dimensions.height * 0.025,
-            ),
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 28),
               child: Row(
@@ -97,7 +136,8 @@ class LoginPage extends StatelessWidget {
                         },
                       text: "Forgot Password?",
                       style: TextStyle(
-                          fontSize: Dimensions.height * 0.02, color: Colors.grey),
+                          fontSize: Dimensions.height * 0.02,
+                          color: Colors.grey),
                     ),
                   ),
                 ],
@@ -106,23 +146,32 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               height: Dimensions.height * 0.05,
             ),
-            Container(
-              width: Dimensions.height * 0.26,
-              height: Dimensions.height * 0.08,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.height * 0.15),
-                color: AppColor.mainColor,
-              ),
-              alignment: Alignment.center,
-              child: BigText(
-                text: "Sign In",
-                color: Colors.white,
-                size: Dimensions.height * 0.027,
+            GestureDetector(
+              onTap: () {
+                if (formKey.currentState!.validate()) {
+                  Get.find<UserController>().loginUser(
+                      emailController.text.toString(),
+                      passController.text.toString());
+                }
+              },
+              child: Container(
+                width: Dimensions.height * 0.26,
+                height: Dimensions.height * 0.08,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.height * 0.15),
+                  color: AppColor.mainColor,
+                ),
+                alignment: Alignment.center,
+                child: BigText(
+                  text: "Sign In",
+                  color: Colors.white,
+                  size: Dimensions.height * 0.027,
+                ),
               ),
             ),
-
-            SizedBox(height: Dimensions.height * 0.1,),
-
+            SizedBox(
+              height: Dimensions.height * 0.1,
+            ),
             RichText(
               text: TextSpan(
                 text: "Don\'t have an account? ",
@@ -132,7 +181,7 @@ class LoginPage extends StatelessWidget {
                   TextSpan(
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        Get.to(() => SignUpPage() , transition: Transition.fade);
+                        Get.to(() => SignUpPage(), transition: Transition.fade);
                       },
                     text: "Create?",
                     style: TextStyle(

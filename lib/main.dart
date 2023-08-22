@@ -3,12 +3,16 @@ import 'package:food_delivery_with_backend/pages/login/login_page.dart';
 import 'package:get/get.dart';
 import 'package:food_delivery_with_backend/helper/dependencies.dart' as dep;
 import 'package:food_delivery_with_backend/helper/dependencies2.dart' as dep2;
+import 'package:food_delivery_with_backend/helper/dependencies4.dart' as dep4;
+import 'package:firebase_core/firebase_core.dart';
 
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   dep.init();
   dep2.init();
+  await Firebase.initializeApp();
+  dep4.init();
   runApp(const MyApp());
 }
 
