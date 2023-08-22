@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:food_delivery_with_backend/pages/home/home_page.dart';
+import 'package:food_delivery_with_backend/controller/user_controller.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
 import 'package:get/get.dart';
 
@@ -9,7 +9,6 @@ import '../../controller/popular_product_controller_dart.dart';
 import '../../controller/recommended_food_controller.dart';
 
 import "package:food_delivery_with_backend/helper/dependencies3.dart" as dep3;
-
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -41,15 +40,9 @@ class _SplashScreenState extends State<SplashScreen>
     animation =
         CurvedAnimation(parent: animationController, curve: Curves.easeOut);
 
-
-    Timer(
-      const Duration(seconds: 5),
-      () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => const HomePage(),
-      )),
-    );
-
-
+    Timer(const Duration(seconds: 5), () {
+      Get.find<UserController>().isUserLogin();
+    });
   }
 
   @override

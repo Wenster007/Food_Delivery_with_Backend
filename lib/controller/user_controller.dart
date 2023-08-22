@@ -15,5 +15,12 @@ class UserController extends GetxController{
     userRepo.loginUsingEmailPass(email, pass);
   }
 
+  void isUserLogin() {
+    userRepo.isLogin();
+  }
+
+  void logoutUser() {
+    userRepo.logout();
+  }
 
 }

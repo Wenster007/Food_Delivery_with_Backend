@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_with_backend/controller/user_controller.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
 import 'package:food_delivery_with_backend/widgets/app_icon.dart';
 import 'package:food_delivery_with_backend/widgets/big_text.dart';
 import 'package:food_delivery_with_backend/widgets/profile_detail_items.dart';
+import 'package:get/get.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -18,9 +20,24 @@ class ProfilePage extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: BigText(
-              text: "Profile",
-              color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BigText(
+                  text: "Profile",
+                  color: Colors.white,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.find<UserController>().logoutUser();
+                  },
+                  child: Icon(
+                    Icons.logout,
+                    color: Colors.white,
+                    size: Dimensions.height * 0.037,
+                  ),
+                ),
+              ],
             ),
           ),
         ),

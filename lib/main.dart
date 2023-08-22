@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_with_backend/pages/login/login_page.dart';
+import 'package:food_delivery_with_backend/pages/splash/splash_screen.dart';
 import 'package:get/get.dart';
 import 'package:food_delivery_with_backend/helper/dependencies.dart' as dep;
 import 'package:food_delivery_with_backend/helper/dependencies2.dart' as dep2;
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: const SplashScreen(),
       // getPages: RouteHelper.routes,
     );
     // return GetBuilder<OrderController>(builder: (_) {

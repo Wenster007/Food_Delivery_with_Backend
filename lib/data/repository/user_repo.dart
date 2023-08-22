@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food_delivery_with_backend/pages/home/home_page.dart';
+import 'package:food_delivery_with_backend/pages/login/login_page.dart';
 import 'package:food_delivery_with_backend/utils/toast.dart';
 import 'package:get/get.dart';
 
@@ -22,5 +23,20 @@ class UserRepo {
         .onError((error, stackTrace) {
       toast().generateToast(error.toString());
     });
+  }
+
+  void isLogin() {
+    final user = auth.currentUser;
+
+    if (user == null) {
+      Get.offAll(()=>LoginPage());
+    } else {
+      Get.offAll(()=>HomePage());
+    }
+  }
+
+  void logout(){
+    auth.signOut();
+    Get.offAll(()=>LoginPage());
   }
 }

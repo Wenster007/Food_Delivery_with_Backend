@@ -146,6 +146,8 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               height: Dimensions.height * 0.05,
             ),
+
+
             GestureDetector(
               onTap: () {
                 if (formKey.currentState!.validate()) {
@@ -169,6 +171,8 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
+
+
             SizedBox(
               height: Dimensions.height * 0.1,
             ),
