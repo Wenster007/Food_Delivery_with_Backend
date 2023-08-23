@@ -126,8 +126,10 @@ class SignUpPage extends StatelessWidget {
               onTap: () {
                 if (formKey.currentState!.validate()) {
                   Get.find<UserController>().createUser(
-                      emailController.text.toString(),
-                      passController.text.toString());
+                      emailController.text,
+                      passController.text,
+                      nameController.text,
+                      phoneController.text,);
                 }
               },
               child: Container(
@@ -145,7 +147,6 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
             ),
-
 
             SizedBox(
               height: Dimensions.height * 0.01,

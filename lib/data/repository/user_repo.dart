@@ -1,19 +1,33 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:food_delivery_with_backend/pages/home/home_page.dart';
 import 'package:food_delivery_with_backend/pages/login/login_page.dart';
 import 'package:food_delivery_with_backend/utils/toast.dart';
 import 'package:get/get.dart';
 
+
 class UserRepo {
   final auth = FirebaseAuth.instance;
+  final database = FirebaseDatabase.instance;
 
-  void createAccountUsingEmailPass(String email, String pass) {
-    auth
+
+  void createAccountUsingEmailPass(String email, String pass, String name, String phone) async {
+
+    await auth
         .createUserWithEmailAndPassword(email: email, password: pass)
-        .then((value) => Get.back())
+        .then((value) {
+          database.ref("Users").child(value.user!.uid).set({
+            "name" : name,
+            "email" : email,
+            "phone" : phone,
+          });
+      Get.back();
+    })
         .onError((error, stackTrace) {
       toast().generateToast(error.toString());
     });
+
+
   }
 
   void loginUsingEmailPass(String email, String pass) {
@@ -29,14 +43,14 @@ class UserRepo {
     final user = auth.currentUser;
 
     if (user == null) {
-      Get.offAll(()=>LoginPage());
+      Get.offAll(() => LoginPage());
     } else {
-      Get.offAll(()=>HomePage());
+      Get.offAll(() => HomePage());
     }
   }
 
-  void logout(){
+  void logout() {
     auth.signOut();
-    Get.offAll(()=>LoginPage());
+    Get.offAll(() => LoginPage());
   }
 }

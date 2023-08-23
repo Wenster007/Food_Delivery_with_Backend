@@ -7,8 +7,8 @@ class UserController extends GetxController{
   UserController({required this.userRepo});
 
 
-  void createUser(String email, String pass) {
-    userRepo.createAccountUsingEmailPass(email, pass);
+  void createUser(String email, String pass, String name, String phone) {
+    userRepo.createAccountUsingEmailPass(email, pass, name, phone);
   }
 
   void loginUser(String email, String pass) {
