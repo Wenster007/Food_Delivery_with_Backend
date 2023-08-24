@@ -6,6 +6,7 @@ class UserController extends GetxController{
 
   UserController({required this.userRepo});
 
+  RxBool isLoading = false.obs;
 
   void createUser(String email, String pass, String name, String phone) {
     userRepo.createAccountUsingEmailPass(email, pass, name, phone);
@@ -21,6 +22,11 @@ class UserController extends GetxController{
 
   void logoutUser() {
     userRepo.logout();
+  }
+
+  void toggleIsLoading() {
+    isLoading.toggle();
+
   }
 
 }

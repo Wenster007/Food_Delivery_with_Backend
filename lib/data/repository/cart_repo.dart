@@ -1,12 +1,14 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:food_delivery_with_backend/utils/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/cart_model.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class CartRepo{
+class CartRepo {
   final SharedPreferences? sharedPreferences;
+
   CartRepo({this.sharedPreferences});
 
   List<String> cart = [];
@@ -18,7 +20,7 @@ class CartRepo{
   //this is used for adding the items to sharedPreferences cart-list
   void addToCartList(List<CartModel> listOfCartProducts) {
     print("2 adding cart data to shard preferences");
-    cart=[];
+    cart = [];
 
     listOfCartProducts.forEach((element) {
       cart.add(jsonEncode(element));
@@ -26,22 +28,23 @@ class CartRepo{
 
     sharedPreferences!.setStringList(AppConstants.CART_LIST, cart);
     addCartItemsToFirebase(cart);
-    addFirebaseDataToSharedPreferences();
   }
-
 
   //takes cartItems and save it to firebase database.
   void addCartItemsToFirebase(List<String> cartItems) {
-    database.ref("Users").child(currentUser.currentUser!.uid).child("cart_items").set(cartItems);
+    database
+        .ref("Users")
+        .child(currentUser.currentUser!.uid)
+        .child("cart_items")
+        .set(cartItems);
   }
-
 
   //this is used for getting the items from sharedPreferences cart-list.
   List<CartModel> getCartList() {
     print("3 getting cart data from shared Preferences");
     List<String> carts = [];
 
-    if(sharedPreferences!.containsKey(AppConstants.CART_LIST)){
+    if (sharedPreferences!.containsKey(AppConstants.CART_LIST)) {
       carts = sharedPreferences!.getStringList(AppConstants.CART_LIST)!;
     }
 
@@ -54,13 +57,11 @@ class CartRepo{
     return cartList;
   }
 
-
   //for adding items into order CartHistoryList
   void addToCartHistoryList() {
     print("4 adding to cart history list");
     cartHistory = [];
     cartHistory = sharedPreferences!.getStringList(AppConstants.CART_LIST)!;
-
 
     cart = [];
     sharedPreferences!.remove(AppConstants.CART_LIST);
@@ -69,14 +70,42 @@ class CartRepo{
 
   //to remove cartItems from firebase when the order is placed
   void removeCartItemsFromFirebase() {
-    database.ref("Users").child(currentUser.currentUser!.uid).child("cart_items").remove();
+    database
+        .ref("Users")
+        .child(currentUser.currentUser!.uid)
+        .child("cart_items")
+        .remove();
   }
-
 
   //adds data of new logined user to shared preferences
-  void addFirebaseDataToSharedPreferences() async{
+  Future<void> addFirebaseDataToSharedPreferences() async {
+    List<String> cartItemsFetchedFromFirebase = [];
 
+    DatabaseEvent databaseEvent =
+        await database.ref("Users").child(currentUser.currentUser!.uid).once();
+
+    Map<dynamic, dynamic> userMap =
+        databaseEvent.snapshot.value as Map<dynamic, dynamic>;
+
+    if (userMap["cart_items"] != null){
+      final cartItemsMapList = userMap["cart_items"];
+
+      for (int i=0; i<cartItemsMapList.length; i++){
+        cartItemsFetchedFromFirebase.add(cartItemsMapList[i]);
+      }
+
+      sharedPreferences!.setStringList(AppConstants.CART_LIST, cartItemsFetchedFromFirebase);
+
+      List<String> list = sharedPreferences!.getStringList(AppConstants.CART_LIST)!;
+
+      for (int i=0; i<list.length; i++) {
+        print(list[i]);
+      }
+    } else {
+      sharedPreferences!.remove(AppConstants.CART_LIST);
+    }
   }
+
 
 
   //for getting data from the CartHistoryList
@@ -91,4 +120,6 @@ class CartRepo{
 
     return cartListHistory;
   }
+
+
 }

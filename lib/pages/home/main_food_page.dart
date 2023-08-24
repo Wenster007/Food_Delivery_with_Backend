@@ -18,10 +18,14 @@ class MainFoodPage extends StatefulWidget {
 }
 
 class _MainFoodPageState extends State<MainFoodPage> {
-  @override
-  Widget build(BuildContext context) {
+  void loadResources() {
     Get.find<CartController>().getCartData();
     Get.find<OrderController>().getListOfOrders();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    loadResources();
     return Scaffold(
       body: Column(
         children: [

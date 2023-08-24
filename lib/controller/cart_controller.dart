@@ -113,4 +113,13 @@ class CartController extends GetxController {
     items = {};
     update();
   }
+
+
+  //for loading data from Firebase when user logins for firstTime
+  Future<void> getCartItemsFromFirebase() async{
+    items = {};
+    storageItems = [];
+    await cartRepo!.addFirebaseDataToSharedPreferences();
+    update();
+  }
 }
