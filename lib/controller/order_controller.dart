@@ -43,4 +43,13 @@ class OrderController extends GetxController{
     });
     return total;
   }
+
+
+  Future<void> getOrdersFromFirebase() async{
+    mapOfOrders = {};
+    storage = [];
+    await orderRepo.addFirebaseDataToSharedPreferences();
+    update();
+  }
+
 }

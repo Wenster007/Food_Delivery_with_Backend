@@ -34,10 +34,13 @@ class UserRepo {
     await auth
         .signInWithEmailAndPassword(email: email, password: pass)
         .then((value)async {
+
       await Get.find<CartController>().getCartItemsFromFirebase();
+      await Get.find<OrderController>().getOrdersFromFirebase();
       Get.find<CartController>().getCartData();
       Get.find<OrderController>().getListOfOrders();
       Get.offAll(() => const HomePage());
+
     }).onError((error, stackTrace) {
       toast().generateToast(error.toString());
     });

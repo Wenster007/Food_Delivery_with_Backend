@@ -19,6 +19,7 @@ class CartRepo {
 
   //this is used for adding the items to sharedPreferences cart-list
   void addToCartList(List<CartModel> listOfCartProducts) {
+
     print("2 adding cart data to shard preferences");
     cart = [];
 
