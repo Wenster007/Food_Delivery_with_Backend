@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:food_delivery_with_backend/controller/cart_controller.dart';
-import 'package:food_delivery_with_backend/controller/user_controller.dart';
 import 'package:food_delivery_with_backend/pages/home/home_page.dart';
 import 'package:food_delivery_with_backend/pages/login/login_page.dart';
 import 'package:food_delivery_with_backend/utils/toast.dart';
 import 'package:get/get.dart';
+
+import '../../controller/order_controller.dart';
 
 
 class UserRepo {
@@ -32,8 +33,10 @@ class UserRepo {
 
     await auth
         .signInWithEmailAndPassword(email: email, password: pass)
-        .then((value) {
-      Get.find<CartController>().getCartItemsFromFirebase();
+        .then((value)async {
+      await Get.find<CartController>().getCartItemsFromFirebase();
+      Get.find<CartController>().getCartData();
+      Get.find<OrderController>().getListOfOrders();
       Get.offAll(() => const HomePage());
     }).onError((error, stackTrace) {
       toast().generateToast(error.toString());

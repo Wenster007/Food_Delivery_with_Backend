@@ -88,6 +88,7 @@ class CartRepo {
         databaseEvent.snapshot.value as Map<dynamic, dynamic>;
 
     if (userMap["cart_items"] != null){
+      debugPrint("getting items from firebase and saving in sharedPreferences");
       final cartItemsMapList = userMap["cart_items"];
 
       for (int i=0; i<cartItemsMapList.length; i++){
@@ -96,11 +97,6 @@ class CartRepo {
 
       sharedPreferences!.setStringList(AppConstants.CART_LIST, cartItemsFetchedFromFirebase);
 
-      List<String> list = sharedPreferences!.getStringList(AppConstants.CART_LIST)!;
-
-      for (int i=0; i<list.length; i++) {
-        print(list[i]);
-      }
     } else {
       sharedPreferences!.remove(AppConstants.CART_LIST);
     }
