@@ -2,24 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/controller/user_controller.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
-import 'package:food_delivery_with_backend/widgets/app_icon.dart';
 import 'package:food_delivery_with_backend/widgets/big_text.dart';
 import 'package:food_delivery_with_backend/widgets/profile_detail_items.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../widgets/circular_line_painter.dart';
+
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Scaffold(
         body: Column(children: [
           Container(
             height: Dimensions.height * 0.07,
-            color: AppColor.mainColor,
+            color: AppColor.yellowColor,
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -45,25 +48,72 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           Container(
+            padding: EdgeInsets.only(bottom: Dimensions.height * 0.03),
             height: Dimensions.height * 0.25,
             alignment: Alignment.center,
-            child: CustomPaint(
-              painter: CircularLinePainter(
-                color: AppColor.yellowColor,
-                strokeWidth: Dimensions.height * 0.006,
-              ),
-              child: AppIcon(
-                icon: Icons.person,
-                backgroundColor: AppColor.mainColor,
-                onTapFunc: () {},
-                iconSize: Dimensions.height * 0.1,
-                size: Dimensions.height * 0.2,
-                iconColor: Colors.white,
+            color: AppColor.yellowColor,
+            child: GetBuilder<UserController>(
+              builder: (userController) => Stack(
+                children: [
+                  CustomPaint(
+                    painter: CircularLinePainter(
+                      color: AppColor.mainColor,
+                      strokeWidth: 4.0,
+                    ),
+                    child: ClipRRect(
+                      borderRadius:
+                          BorderRadius.circular(Dimensions.height * 0.1),
+                      child: userController.image == null
+                          ? Container(
+                              height: Dimensions.height * 0.2,
+                              width: Dimensions.height * 0.2,
+                              decoration: const BoxDecoration(
+                                color: Colors.blue,
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/user_image3.png"),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            )
+                          : Container(
+                              height: Dimensions.height * 0.2,
+                              width: Dimensions.height * 0.2,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: FileImage(userController.image!,),fit: BoxFit.cover
+                                ),
+                              ),
+                            ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: Dimensions.height * 0.007,
+                    child: ClipRRect(
+                      borderRadius:
+                          BorderRadius.circular(Dimensions.height * 0.025),
+                      child: Container(
+                        color: AppColor.mainColor,
+                        width: Dimensions.height * 0.05,
+                        height: Dimensions.height * 0.05,
+                        alignment: Alignment.center,
+                        child: GestureDetector(
+                            onTap: () {
+                              userController.pickImage(ImageSource.gallery);
+                            },
+                            child: Icon(
+                              Icons.camera_alt_sharp,
+                              size: Dimensions.height * 0.035,
+                              color: Colors.black87,
+                            )),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-
-
           Expanded(
             child: SingleChildScrollView(
                 child: Column(

@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:food_delivery_with_backend/data/repository/user_repo.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UserController extends GetxController{
   final UserRepo userRepo;
@@ -7,6 +10,12 @@ class UserController extends GetxController{
   UserController({required this.userRepo});
 
   bool isLoading = false;
+
+
+  final _imagePicker = ImagePicker();
+  File? image;
+  String? _imageUrl;
+
 
   void createUser(String email, String pass, String name, String phone) async{
     isLoading = true;
@@ -43,5 +52,25 @@ class UserController extends GetxController{
   String get userPhone {
     return userRepo.getPhoneFromSharedPreferences();
   }
+
+  Future<void> pickImage(ImageSource source) async {
+    final pickedFile = await _imagePicker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      update();
+      image = File(pickedFile.path);
+    }
+  }
+
+  void getProfileImage() {
+    String? imagePath ;
+    userRepo.getImageFromSharedPreferences(imagePath);
+
+    if(imagePath != null) {
+      image = File(imagePath);
+    }
+  }
+
+
 
 }

@@ -26,7 +26,6 @@ class PopularFoodDetails extends StatelessWidget {
     Get.find<PopularProductController>()
         .addCartController(Get.find<CartController>());
 
-
     return Scaffold(
         body: Container(
           height: double.infinity,
@@ -39,7 +38,7 @@ class PopularFoodDetails extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                       image: NetworkImage(
-                        AppConstants.BASE_URL + "/uploads/" + products.img!,
+                        "${AppConstants.BASE_URL}/uploads/${products.img!}",
                       ),
                       fit: BoxFit.cover),
                 ),

@@ -1,3 +1,4 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:food_delivery_with_backend/controller/cart_controller.dart';
@@ -16,6 +17,8 @@ class UserRepo {
   final database = FirebaseDatabase.instance;
 
   SharedPreferences sharedPreferences = Get.find();
+
+
 
   Future<void> createAccountUsingEmailPass(
       String email, String pass, String name, String phone) async {
@@ -89,5 +92,17 @@ class UserRepo {
     Get.offAll(() => const LoginPage());
   }
 
+
+  void storeImageInSharedPreferences(String imagePath) {
+    sharedPreferences.setString(AppConstants.PROFILE_IMG_PATH, imagePath);
+  }
+
+  void getImageFromSharedPreferences(String? imagePathVariable)  {
+    if (sharedPreferences.containsKey(AppConstants.PROFILE_IMG_PATH)){
+      imagePathVariable = sharedPreferences.getString(AppConstants.PROFILE_IMG_PATH)!;
+    } else {
+      imagePathVariable = null;
+    }
+  }
 
 }

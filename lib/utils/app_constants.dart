@@ -17,4 +17,6 @@ class AppConstants{
   static const String USER_EMAIL = "user_email";
   static const String USER_NAME = "user_name";
   static const String USER_PHONE = "user_phone";
+
+  static const String PROFILE_IMG_PATH = "profile_img_path";
 }

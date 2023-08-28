@@ -10,7 +10,7 @@ class CircularLinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.width / 2);
-    final radius = size.width / 2  + Dimensions.height * 0.008;
+    final radius = size.width / 2  + Dimensions.height * 0.011;
 
     final paint = Paint()
       ..color = color
