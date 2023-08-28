@@ -1,3 +1,4 @@
+
 class AppConstants{
   static const String APP_NAME = "DBFood";
   static const int APP_VERSION = 1;
@@ -12,4 +13,8 @@ class AppConstants{
   static const String CART_HISTORY_LIST = "cart-history-list";
 
   static const String ORDER_HISTORY_LIST = "order-history-list";
+
+  static const String USER_EMAIL = "user_email";
+  static const String USER_NAME = "user_name";
+  static const String USER_PHONE = "user_phone";
 }

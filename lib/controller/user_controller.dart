@@ -32,5 +32,16 @@ class UserController extends GetxController{
     userRepo.logout();
   }
 
+  String get userEmail {
+    return userRepo.getEmailFromSharedPreferences();
+  }
+
+  String get userName {
+    return userRepo.getNameFromSharedPreferences();
+  }
+
+  String get userPhone {
+    return userRepo.getPhoneFromSharedPreferences();
+  }
 
 }

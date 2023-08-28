@@ -14,41 +14,43 @@ class OrderHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            color: AppColor.mainColor,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: Dimensions.height * 0.017, vertical: Dimensions.height * 0.008),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  BigText(text: "Order History", color: Colors.white,),
-                  AppIcon(
-                    icon: Icons.shopping_cart_outlined,
-                    onTapFunc: () {},
-                    backgroundColor: AppColor.mainColor,
-                    iconColor: Colors.black38,
-                  )
-                ],
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            Container(
+              color: AppColor.mainColor,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: Dimensions.height * 0.017, vertical: Dimensions.height * 0.008),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    BigText(text: "Order History", color: Colors.white,),
+                    AppIcon(
+                      icon: Icons.shopping_cart_outlined,
+                      onTapFunc: () {},
+                      backgroundColor: AppColor.mainColor,
+                      iconColor: Colors.black38,
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-          Get.find<OrderController>().getListOfOrders().isNotEmpty?GetBuilder<OrderController>(
-            builder: (orderController) {
-              return Expanded(
-                child: ListView.builder(
-                  itemCount: orderController.getListOfOrders().length,
-                  itemBuilder: (context, index) {
-                    return OrderItem(
-                        order: orderController.listOfTotalOrders[index]);
-                  },
-                ),
-              );
-            },
-          ):Expanded(child: EmptyCart()),
-        ],
+            Get.find<OrderController>().getListOfOrders().isNotEmpty?GetBuilder<OrderController>(
+              builder: (orderController) {
+                return Expanded(
+                  child: ListView.builder(
+                    itemCount: orderController.getListOfOrders().length,
+                    itemBuilder: (context, index) {
+                      return OrderItem(
+                          order: orderController.listOfTotalOrders[index]);
+                    },
+                  ),
+                );
+              },
+            ):Expanded(child: EmptyCart()),
+          ],
+        ),
       ),
     );
   }

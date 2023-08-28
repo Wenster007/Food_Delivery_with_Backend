@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
 import 'package:food_delivery_with_backend/utils/dimensions.dart';
 import 'package:food_delivery_with_backend/widgets/app_icon.dart';
-import 'package:food_delivery_with_backend/widgets/big_text.dart';
 
 class ProfileDetailItems extends StatelessWidget {
   const ProfileDetailItems(
@@ -21,7 +20,7 @@ class ProfileDetailItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: Dimensions.height * 0.01),
+      margin: EdgeInsets.only(bottom: Dimensions.height * 0.007),
       decoration: const BoxDecoration(color: Colors.white, boxShadow: [
         BoxShadow(
             color: Colors.grey,
@@ -31,7 +30,7 @@ class ProfileDetailItems extends StatelessWidget {
             blurStyle: BlurStyle.outer),
       ]),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: Dimensions.height * 0.017),
         child: Row(
           children: [
             AppIcon(
@@ -45,7 +44,17 @@ class ProfileDetailItems extends StatelessWidget {
             SizedBox(
               width: Dimensions.height * 0.02,
             ),
-            BigText(text: text, color: Colors.black54,),
+            Expanded(
+              child: Text(
+                text,
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: Dimensions.height * 0.025,
+                  overflow: TextOverflow.ellipsis,
+                  
+                ),
+              ),
+            ),
           ],
         ),
       ),

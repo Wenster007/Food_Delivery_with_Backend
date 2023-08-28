@@ -7,97 +7,111 @@ import 'package:food_delivery_with_backend/widgets/big_text.dart';
 import 'package:food_delivery_with_backend/widgets/profile_detail_items.dart';
 import 'package:get/get.dart';
 
+import '../../widgets/circular_line_painter.dart';
+
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(children: [
-        Container(
-          height: Dimensions.height * 0.07,
-          color: AppColor.mainColor,
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                BigText(
-                  text: "Profile",
-                  color: Colors.white,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Get.find<UserController>().logoutUser();
-                  },
-                  child: Icon(
-                    Icons.logout,
+    return SafeArea(
+      child: Scaffold(
+        body: Column(children: [
+          Container(
+            height: Dimensions.height * 0.07,
+            color: AppColor.mainColor,
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  BigText(
+                    text: "Profile",
                     color: Colors.white,
-                    size: Dimensions.height * 0.037,
                   ),
-                ),
-              ],
+                  GestureDetector(
+                    onTap: () {
+                      Get.find<UserController>().logoutUser();
+                    },
+                    child: Icon(
+                      Icons.logout,
+                      color: Colors.white,
+                      size: Dimensions.height * 0.037,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        Container(
-          height: Dimensions.height * 0.25,
-          alignment: Alignment.center,
-          child: AppIcon(
-            icon: Icons.person,
-            backgroundColor: AppColor.mainColor,
-            onTapFunc: () {},
-            iconSize: Dimensions.height * 0.1,
-            size: Dimensions.height * 0.2,
-            iconColor: Colors.white,
+          Container(
+            height: Dimensions.height * 0.25,
+            alignment: Alignment.center,
+            child: CustomPaint(
+              painter: CircularLinePainter(
+                color: AppColor.yellowColor,
+                strokeWidth: Dimensions.height * 0.006,
+              ),
+              child: AppIcon(
+                icon: Icons.person,
+                backgroundColor: AppColor.mainColor,
+                onTapFunc: () {},
+                iconSize: Dimensions.height * 0.1,
+                size: Dimensions.height * 0.2,
+                iconColor: Colors.white,
+              ),
+            ),
           ),
-        ),
-        Expanded(
-          child: SingleChildScrollView(
-              child: Column(
-            children: [
-              ProfileDetailItems(
-                  text: "Ahmed", icon: Icons.person, iconOnTap: () {}),
-              SizedBox(
-                height: Dimensions.height * 0.01,
-              ),
-              ProfileDetailItems(
-                  text: "+92314 --- -- ---",
-                  icon: Icons.call,
-                  iconOnTap: () {},
-                  iconBackgroundColor: AppColor.yellowColor),
-              SizedBox(
-                height: Dimensions.height * 0.01,
-              ),
-              ProfileDetailItems(
-                  text: "Infacts22@gmail.com",
-                  icon: Icons.email,
-                  iconOnTap: () {},
-                  iconBackgroundColor: AppColor.yellowColor),
-              SizedBox(
-                height: Dimensions.height * 0.01,
-              ),
-              ProfileDetailItems(
-                  text: "Address",
-                  icon: Icons.location_on,
-                  iconOnTap: () {},
-                  iconBackgroundColor: AppColor.yellowColor),
-              SizedBox(
-                height: Dimensions.height * 0.01,
-              ),
-              ProfileDetailItems(
-                  text: "Additional Information",
-                  icon: Icons.comment,
-                  iconOnTap: () {},
-                  iconBackgroundColor: Colors.redAccent),
-              SizedBox(
-                height: Dimensions.height * 0.01,
-              ),
-            ],
-          )),
-        )
-      ]),
+
+
+          Expanded(
+            child: SingleChildScrollView(
+                child: Column(
+              children: [
+                ProfileDetailItems(
+                    text: Get.find<UserController>().userName,
+                    icon: Icons.person,
+                    iconOnTap: () {}),
+                SizedBox(
+                  height: Dimensions.height * 0.01,
+                ),
+                ProfileDetailItems(
+                    text: Get.find<UserController>().userPhone,
+                    icon: Icons.call,
+                    iconOnTap: () {},
+                    iconBackgroundColor: AppColor.yellowColor),
+                SizedBox(
+                  height: Dimensions.height * 0.01,
+                ),
+                ProfileDetailItems(
+                    text: Get.find<UserController>().userEmail,
+                    icon: Icons.email,
+                    iconOnTap: () {},
+                    iconBackgroundColor: AppColor.yellowColor),
+                SizedBox(
+                  height: Dimensions.height * 0.01,
+                ),
+                ProfileDetailItems(
+                    text: "Address",
+                    icon: Icons.location_on,
+                    iconOnTap: () {},
+                    iconBackgroundColor: AppColor.yellowColor),
+                SizedBox(
+                  height: Dimensions.height * 0.01,
+                ),
+                ProfileDetailItems(
+                    text: "Additional Information",
+                    icon: Icons.comment,
+                    iconOnTap: () {},
+                    iconBackgroundColor: Colors.redAccent),
+                SizedBox(
+                  height: Dimensions.height * 0.01,
+                ),
+              ],
+            )),
+          )
+        ]),
+      ),
     );
   }
 }
