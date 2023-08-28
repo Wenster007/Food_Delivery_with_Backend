@@ -95,7 +95,6 @@ class LoginPage extends StatelessWidget {
                         return "     Incorrect Email Format";
                       }
 
-
                       return null;
                     },
                   ),
@@ -147,31 +146,31 @@ class LoginPage extends StatelessWidget {
               height: Dimensions.height * 0.05,
             ),
 
-
             GestureDetector(
-              onTap: () {
-                if (formKey.currentState!.validate()) {
-                  Get.find<UserController>().loginUser(
-                      emailController.text.toString(),
-                      passController.text.toString());
-                }
-              },
-              child: Container(
-                width: Dimensions.height * 0.26,
-                height: Dimensions.height * 0.08,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.height * 0.15),
-                  color: AppColor.mainColor,
-                ),
-                alignment: Alignment.center,
-                child: BigText(
-                  text: "Sign In",
-                  color: Colors.white,
-                  size: Dimensions.height * 0.027,
-                ),
-              ),
-            ),
-
+                onTap: () {
+                  if (formKey.currentState!.validate()) {
+                    Get.find<UserController>().loginUser(
+                        emailController.text.toString(),
+                        passController.text.toString());
+                  }
+                },
+                child: GetBuilder<UserController>(
+                  builder: (userController) => Container(
+                    width: Dimensions.height * 0.26,
+                    height: Dimensions.height * 0.08,
+                    decoration: BoxDecoration(
+                      borderRadius:
+                          BorderRadius.circular(Dimensions.height * 0.15),
+                      color: AppColor.mainColor,
+                    ),
+                    alignment: Alignment.center,
+                    child: userController.isLoading ? const CircularProgressIndicator(color: Colors.white, ) : BigText(
+                      text: "Sign In",
+                      color: Colors.white,
+                      size: Dimensions.height * 0.027,
+                    ),
+                  ),
+                )),
 
             SizedBox(
               height: Dimensions.height * 0.1,

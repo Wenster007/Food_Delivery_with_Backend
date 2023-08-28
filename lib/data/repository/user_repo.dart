@@ -13,7 +13,7 @@ class UserRepo {
   final auth = FirebaseAuth.instance;
   final database = FirebaseDatabase.instance;
 
-  void createAccountUsingEmailPass(
+  Future<void> createAccountUsingEmailPass(
       String email, String pass, String name, String phone) async {
     await auth
         .createUserWithEmailAndPassword(email: email, password: pass)
@@ -29,8 +29,7 @@ class UserRepo {
     });
   }
 
-  void loginUsingEmailPass(String email, String pass) async {
-
+  Future<void> loginUsingEmailPass(String email, String pass) async {
     await auth
         .signInWithEmailAndPassword(email: email, password: pass)
         .then((value)async {

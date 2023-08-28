@@ -6,14 +6,22 @@ class UserController extends GetxController{
 
   UserController({required this.userRepo});
 
-  RxBool isLoading = false.obs;
+  bool isLoading = false;
 
-  void createUser(String email, String pass, String name, String phone) {
-    userRepo.createAccountUsingEmailPass(email, pass, name, phone);
+  void createUser(String email, String pass, String name, String phone) async{
+    isLoading = true;
+    update();
+    await userRepo.createAccountUsingEmailPass(email, pass, name, phone);
+    isLoading = false;
+    update();
   }
 
-  void loginUser(String email, String pass) {
-    userRepo.loginUsingEmailPass(email, pass);
+  void loginUser(String email, String pass) async{
+    isLoading = true;
+    update();
+    await userRepo.loginUsingEmailPass(email, pass);
+    isLoading = false;
+    update();
   }
 
   void isUserLogin() {
@@ -24,9 +32,5 @@ class UserController extends GetxController{
     userRepo.logout();
   }
 
-  void toggleIsLoading() {
-    isLoading.toggle();
-
-  }
 
 }

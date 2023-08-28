@@ -123,30 +123,39 @@ class SignUpPage extends StatelessWidget {
             ),
 
             GestureDetector(
-              onTap: () {
-                if (formKey.currentState!.validate()) {
-                  Get.find<UserController>().createUser(
+                onTap: () {
+                  if (formKey.currentState!.validate()) {
+                    Get.find<UserController>().createUser(
                       emailController.text,
                       passController.text,
                       nameController.text,
-                      phoneController.text,);
-                }
-              },
-              child: Container(
-                width: Dimensions.height * 0.26,
-                height: Dimensions.height * 0.08,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.height * 0.15),
-                  color: AppColor.mainColor,
-                ),
-                alignment: Alignment.center,
-                child: BigText(
-                  text: "Sign Up",
-                  color: Colors.white,
-                  size: Dimensions.height * 0.027,
-                ),
-              ),
-            ),
+                      phoneController.text,
+                    );
+                  }
+                },
+                child: GetBuilder<UserController>(
+                  builder: (userController) => Container(
+                    width: Dimensions.height * 0.26,
+                    height: Dimensions.height * 0.08,
+                    decoration: BoxDecoration(
+                      borderRadius:
+                          BorderRadius.circular(Dimensions.height * 0.15),
+                      color: AppColor.mainColor,
+                    ),
+                    alignment: Alignment.center,
+                    child: userController.isLoading
+                        ? const CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : BigText(
+                            text: "Sign Up",
+                            color: Colors.white,
+                            size: Dimensions.height * 0.027,
+                          ),
+                  ),
+                )),
+
+
 
             SizedBox(
               height: Dimensions.height * 0.01,
