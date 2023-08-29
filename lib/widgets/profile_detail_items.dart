@@ -30,7 +30,7 @@ class ProfileDetailItems extends StatelessWidget {
             blurStyle: BlurStyle.outer),
       ]),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: Dimensions.height * 0.017),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: Dimensions.height * 0.0115),
         child: Row(
           children: [
             AppIcon(

@@ -97,12 +97,6 @@ class UserRepo {
     sharedPreferences.setString(AppConstants.PROFILE_IMG_PATH, imagePath);
   }
 
-  void getImageFromSharedPreferences(String? imagePathVariable)  {
-    if (sharedPreferences.containsKey(AppConstants.PROFILE_IMG_PATH)){
-      imagePathVariable = sharedPreferences.getString(AppConstants.PROFILE_IMG_PATH)!;
-    } else {
-      imagePathVariable = null;
-    }
-  }
+
 
 }

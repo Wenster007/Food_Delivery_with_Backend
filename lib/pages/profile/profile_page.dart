@@ -9,13 +9,12 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../widgets/circular_line_painter.dart';
 
-
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
+    Get.find<UserController>().isUserProfilePicUploaded();
 
     return SafeArea(
       child: Scaffold(
@@ -52,8 +51,8 @@ class ProfilePage extends StatelessWidget {
             height: Dimensions.height * 0.25,
             alignment: Alignment.center,
             color: AppColor.yellowColor,
-            child: GetBuilder<UserController>(
-              builder: (userController) => Stack(
+            child: GetBuilder<UserController>(builder: (userController) {
+              return Stack(
                 children: [
                   CustomPaint(
                     painter: CircularLinePainter(
@@ -63,7 +62,7 @@ class ProfilePage extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius:
                           BorderRadius.circular(Dimensions.height * 0.1),
-                      child: userController.image == null
+                      child: userController.isProfilePicUploaded == false
                           ? Container(
                               height: Dimensions.height * 0.2,
                               width: Dimensions.height * 0.2,
@@ -81,8 +80,10 @@ class ProfilePage extends StatelessWidget {
                               width: Dimensions.height * 0.2,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: FileImage(userController.image!,),fit: BoxFit.cover
-                                ),
+                                    image: NetworkImage(
+                                      userController.imageUrl!,
+                                    ),
+                                    fit: BoxFit.cover),
                               ),
                             ),
                     ),
@@ -99,66 +100,68 @@ class ProfilePage extends StatelessWidget {
                         height: Dimensions.height * 0.05,
                         alignment: Alignment.center,
                         child: GestureDetector(
-                            onTap: () {
-                              userController.pickImage(ImageSource.gallery);
-                            },
-                            child: Icon(
-                              Icons.camera_alt_sharp,
-                              size: Dimensions.height * 0.035,
-                              color: Colors.black87,
-                            )),
+                          onTap: () async {
+                            await userController.pickImage(ImageSource.gallery);
+                          },
+                          child: Icon(
+                            Icons.camera_alt_sharp,
+                            size: Dimensions.height * 0.035,
+                            color: Colors.black87,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ],
-              ),
-            ),
+              );
+            }),
           ),
           Expanded(
             child: SingleChildScrollView(
-                child: Column(
-              children: [
-                ProfileDetailItems(
-                    text: Get.find<UserController>().userName,
-                    icon: Icons.person,
-                    iconOnTap: () {}),
-                SizedBox(
-                  height: Dimensions.height * 0.01,
-                ),
-                ProfileDetailItems(
-                    text: Get.find<UserController>().userPhone,
-                    icon: Icons.call,
-                    iconOnTap: () {},
-                    iconBackgroundColor: AppColor.yellowColor),
-                SizedBox(
-                  height: Dimensions.height * 0.01,
-                ),
-                ProfileDetailItems(
-                    text: Get.find<UserController>().userEmail,
-                    icon: Icons.email,
-                    iconOnTap: () {},
-                    iconBackgroundColor: AppColor.yellowColor),
-                SizedBox(
-                  height: Dimensions.height * 0.01,
-                ),
-                ProfileDetailItems(
-                    text: "Address",
-                    icon: Icons.location_on,
-                    iconOnTap: () {},
-                    iconBackgroundColor: AppColor.yellowColor),
-                SizedBox(
-                  height: Dimensions.height * 0.01,
-                ),
-                ProfileDetailItems(
-                    text: "Additional Information",
-                    icon: Icons.comment,
-                    iconOnTap: () {},
-                    iconBackgroundColor: Colors.redAccent),
-                SizedBox(
-                  height: Dimensions.height * 0.01,
-                ),
-              ],
-            )),
+              child: Column(
+                children: [
+              ProfileDetailItems(
+                  text: Get.find<UserController>().userName,
+                  icon: Icons.person,
+                  iconOnTap: () {}),
+              SizedBox(
+                height: Dimensions.height * 0.01,
+              ),
+              ProfileDetailItems(
+                  text: Get.find<UserController>().userPhone,
+                  icon: Icons.call,
+                  iconOnTap: () {},
+                  iconBackgroundColor: AppColor.yellowColor),
+              SizedBox(
+                height: Dimensions.height * 0.01,
+              ),
+              ProfileDetailItems(
+                  text: Get.find<UserController>().userEmail,
+                  icon: Icons.email,
+                  iconOnTap: () {},
+                  iconBackgroundColor: AppColor.yellowColor),
+              SizedBox(
+                height: Dimensions.height * 0.01,
+              ),
+              ProfileDetailItems(
+                  text: "Address",
+                  icon: Icons.location_on,
+                  iconOnTap: () {},
+                  iconBackgroundColor: AppColor.yellowColor),
+              SizedBox(
+                height: Dimensions.height * 0.01,
+              ),
+              ProfileDetailItems(
+                  text: "Additional Information",
+                  icon: Icons.comment,
+                  iconOnTap: () {},
+                  iconBackgroundColor: Colors.redAccent),
+              SizedBox(
+                height: Dimensions.height * 0.01,
+              ),
+                ],
+              ),
+            ),
           )
         ]),
       ),
