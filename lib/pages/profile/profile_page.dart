@@ -60,32 +60,44 @@ class ProfilePage extends StatelessWidget {
                       strokeWidth: 4.0,
                     ),
                     child: ClipRRect(
-                      borderRadius:
-                          BorderRadius.circular(Dimensions.height * 0.1),
-                      child: userController.isProfilePicUploaded == false
-                          ? Container(
-                              height: Dimensions.height * 0.2,
-                              width: Dimensions.height * 0.2,
-                              decoration: const BoxDecoration(
-                                color: Colors.blue,
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                      "assets/images/user_image3.png"),
-                                  fit: BoxFit.cover,
+                        borderRadius:
+                        BorderRadius.circular(Dimensions.height * 0.1),
+                        child: userController.isProfilePicUploaded == true &&
+                            userController.image == null
+                            ? Container(
+                          height: Dimensions.height * 0.2,
+                          width: Dimensions.height * 0.2,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                  userController.imageUrl!,
                                 ),
-                              ),
-                            )
-                          : Container(
-                              height: Dimensions.height * 0.2,
-                              width: Dimensions.height * 0.2,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                      userController.imageUrl!,
-                                    ),
-                                    fit: BoxFit.cover),
-                              ),
+                                fit: BoxFit.cover),
+                          ),
+                        ) : userController.image == null
+                            ? Container(
+                          height: Dimensions.height * 0.2,
+                          width: Dimensions.height * 0.2,
+                          decoration: const BoxDecoration(
+                            color: Colors.blue,
+                            image: DecorationImage(
+                              image: AssetImage(
+                                  "assets/images/user_image3.png"),
+                              fit: BoxFit.cover,
                             ),
+                          ),
+                        ) :
+                        Container(
+                          height: Dimensions.height * 0.2,
+                          width: Dimensions.height * 0.2,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            image: DecorationImage(
+                              image: FileImage(userController.image!),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        )
                     ),
                   ),
                   Positioned(
@@ -93,7 +105,7 @@ class ProfilePage extends StatelessWidget {
                     right: Dimensions.height * 0.007,
                     child: ClipRRect(
                       borderRadius:
-                          BorderRadius.circular(Dimensions.height * 0.025),
+                      BorderRadius.circular(Dimensions.height * 0.025),
                       child: Container(
                         color: AppColor.mainColor,
                         width: Dimensions.height * 0.05,
@@ -120,45 +132,51 @@ class ProfilePage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-              ProfileDetailItems(
-                  text: Get.find<UserController>().userName,
-                  icon: Icons.person,
-                  iconOnTap: () {}),
-              SizedBox(
-                height: Dimensions.height * 0.01,
-              ),
-              ProfileDetailItems(
-                  text: Get.find<UserController>().userPhone,
-                  icon: Icons.call,
-                  iconOnTap: () {},
-                  iconBackgroundColor: AppColor.yellowColor),
-              SizedBox(
-                height: Dimensions.height * 0.01,
-              ),
-              ProfileDetailItems(
-                  text: Get.find<UserController>().userEmail,
-                  icon: Icons.email,
-                  iconOnTap: () {},
-                  iconBackgroundColor: AppColor.yellowColor),
-              SizedBox(
-                height: Dimensions.height * 0.01,
-              ),
-              ProfileDetailItems(
-                  text: "Address",
-                  icon: Icons.location_on,
-                  iconOnTap: () {},
-                  iconBackgroundColor: AppColor.yellowColor),
-              SizedBox(
-                height: Dimensions.height * 0.01,
-              ),
-              ProfileDetailItems(
-                  text: "Additional Information",
-                  icon: Icons.comment,
-                  iconOnTap: () {},
-                  iconBackgroundColor: Colors.redAccent),
-              SizedBox(
-                height: Dimensions.height * 0.01,
-              ),
+                  ProfileDetailItems(
+                      text: Get
+                          .find<UserController>()
+                          .userName,
+                      icon: Icons.person,
+                      iconOnTap: () {}),
+                  SizedBox(
+                    height: Dimensions.height * 0.01,
+                  ),
+                  ProfileDetailItems(
+                      text: Get
+                          .find<UserController>()
+                          .userPhone,
+                      icon: Icons.call,
+                      iconOnTap: () {},
+                      iconBackgroundColor: AppColor.yellowColor),
+                  SizedBox(
+                    height: Dimensions.height * 0.01,
+                  ),
+                  ProfileDetailItems(
+                      text: Get
+                          .find<UserController>()
+                          .userEmail,
+                      icon: Icons.email,
+                      iconOnTap: () {},
+                      iconBackgroundColor: AppColor.yellowColor),
+                  SizedBox(
+                    height: Dimensions.height * 0.01,
+                  ),
+                  ProfileDetailItems(
+                      text: "Address",
+                      icon: Icons.location_on,
+                      iconOnTap: () {},
+                      iconBackgroundColor: AppColor.yellowColor),
+                  SizedBox(
+                    height: Dimensions.height * 0.01,
+                  ),
+                  ProfileDetailItems(
+                      text: "Additional Information",
+                      icon: Icons.comment,
+                      iconOnTap: () {},
+                      iconBackgroundColor: Colors.redAccent),
+                  SizedBox(
+                    height: Dimensions.height * 0.01,
+                  ),
                 ],
               ),
             ),

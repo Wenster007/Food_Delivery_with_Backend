@@ -61,8 +61,8 @@ class UserController extends GetxController {
 
     if (pickedFile != null) {
       image = File(pickedFile.path);
-      update();
       uploadImageToFirebase();
+      update();
     }
   }
 
@@ -84,10 +84,13 @@ class UserController extends GetxController {
         print("image uploaded");
       });
     }
+
+
   }
 
 
   Future<void> isUserProfilePicUploaded() async {
+    image = null;
     isProfilePicUploaded = false;
     profilePicLoading = true;
 
