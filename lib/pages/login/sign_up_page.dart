@@ -18,7 +18,6 @@ class SignUpPage extends StatelessWidget {
     final nameController = TextEditingController();
     final phoneController = TextEditingController();
 
-    final List<String> imageOfLoginOptions = ["f.png", "t.png", "g.png"];
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -155,8 +154,6 @@ class SignUpPage extends StatelessWidget {
                   ),
                 )),
 
-
-
             SizedBox(
               height: Dimensions.height * 0.01,
             ),
@@ -183,28 +180,29 @@ class SignUpPage extends StatelessWidget {
               height: Dimensions.height * 0.015,
             ),
             Text(
-              "Sign up using one of the following options.",
+              "Sign up using the following method.",
               style: TextStyle(
                   fontSize: Dimensions.height * 0.02, color: Colors.grey),
             ),
             SizedBox(
               height: Dimensions.height * 0.01,
             ),
-            Wrap(
-              children: List.generate(
-                3,
-                (index) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: CircleAvatar(
-                    radius: Dimensions.height * 0.023,
-                    backgroundImage: AssetImage(
-                      "assets/images/${imageOfLoginOptions[index]}",
-                    ),
-                    backgroundColor: Colors.white,
-                  ),
+
+            GestureDetector(
+              onTap: () async {
+                await Get.find<UserController>().loginThroughGoogle();
+              },
+              child: Container(
+                width: Dimensions.height * 0.29,
+                height: Dimensions.height * 0.08,
+                decoration: BoxDecoration(
+                  image: const DecorationImage(image: AssetImage("assets/images/g2.png")),
+                  borderRadius:
+                  BorderRadius.circular(Dimensions.height * 0.15),
                 ),
               ),
-            )
+            ),
+
           ],
         ),
       ),

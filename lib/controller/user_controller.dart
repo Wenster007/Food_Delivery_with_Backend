@@ -52,15 +52,15 @@ class UserController extends GetxController {
     update();
   }
 
-  String get userEmail {
+  String? get userEmail {
     return userRepo.getEmailFromSharedPreferences();
   }
 
-  String get userName {
+  String? get userName {
     return userRepo.getNameFromSharedPreferences();
   }
 
-  String get userPhone {
+  String? get userPhone {
     return userRepo.getPhoneFromSharedPreferences();
   }
 
@@ -120,7 +120,10 @@ class UserController extends GetxController {
     else{
       isProfilePicUploaded = false;
     }
+  }
 
+  Future<void> loginThroughGoogle() async{
+    await userRepo.loginThroughGoogle();
   }
 
 }

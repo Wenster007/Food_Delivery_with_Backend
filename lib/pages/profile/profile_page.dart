@@ -61,51 +61,51 @@ class ProfilePage extends StatelessWidget {
                     ),
                     child: ClipRRect(
                         borderRadius:
-                        BorderRadius.circular(Dimensions.height * 0.1),
+                            BorderRadius.circular(Dimensions.height * 0.1),
                         child: userController.isProfilePicUploaded == true &&
-                            userController.image == null
+                                userController.image == null
                             ? Container(
-                          height: Dimensions.height * 0.2,
-                          width: Dimensions.height * 0.2,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                  userController.imageUrl!,
+                                height: Dimensions.height * 0.2,
+                                width: Dimensions.height * 0.2,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                        userController.imageUrl!,
+                                      ),
+                                      fit: BoxFit.cover),
                                 ),
-                                fit: BoxFit.cover),
-                          ),
-                        ) : userController.image == null
-                            ? Container(
-                          height: Dimensions.height * 0.2,
-                          width: Dimensions.height * 0.2,
-                          decoration: const BoxDecoration(
-                            color: Colors.blue,
-                            image: DecorationImage(
-                              image: AssetImage(
-                                  "assets/images/user_image3.png"),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ) :
-                        Container(
-                          height: Dimensions.height * 0.2,
-                          width: Dimensions.height * 0.2,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            image: DecorationImage(
-                              image: FileImage(userController.image!),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        )
-                    ),
+                              )
+                            : userController.image == null
+                                ? Container(
+                                    height: Dimensions.height * 0.2,
+                                    width: Dimensions.height * 0.2,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.blue,
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/user_image3.png"),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    height: Dimensions.height * 0.2,
+                                    width: Dimensions.height * 0.2,
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      image: DecorationImage(
+                                        image: FileImage(userController.image!),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  )),
                   ),
                   Positioned(
                     bottom: 0,
                     right: Dimensions.height * 0.007,
                     child: ClipRRect(
                       borderRadius:
-                      BorderRadius.circular(Dimensions.height * 0.025),
+                          BorderRadius.circular(Dimensions.height * 0.025),
                       child: Container(
                         color: AppColor.mainColor,
                         width: Dimensions.height * 0.05,
@@ -133,18 +133,16 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 children: [
                   ProfileDetailItems(
-                      text: Get
-                          .find<UserController>()
-                          .userName,
+                      text: Get.find<UserController>().userName == null ? "User Name" : Get.find<UserController>().userName!,
                       icon: Icons.person,
                       iconOnTap: () {}),
                   SizedBox(
                     height: Dimensions.height * 0.01,
                   ),
                   ProfileDetailItems(
-                      text: Get
-                          .find<UserController>()
-                          .userPhone,
+                      text: Get.find<UserController>().userPhone == null
+                          ? "+92 314 --- -- ---"
+                          : Get.find<UserController>().userPhone!,
                       icon: Icons.call,
                       iconOnTap: () {},
                       iconBackgroundColor: AppColor.yellowColor),
@@ -152,9 +150,7 @@ class ProfilePage extends StatelessWidget {
                     height: Dimensions.height * 0.01,
                   ),
                   ProfileDetailItems(
-                      text: Get
-                          .find<UserController>()
-                          .userEmail,
+                      text: Get.find<UserController>().userEmail == null ? "username@gmail.com" : Get.find<UserController>().userEmail!,
                       icon: Icons.email,
                       iconOnTap: () {},
                       iconBackgroundColor: AppColor.yellowColor),

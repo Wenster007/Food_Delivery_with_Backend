@@ -7,12 +7,15 @@ import 'package:food_delivery_with_backend/utils/app_constants.dart';
 import 'package:food_delivery_with_backend/utils/toast.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 
 import '../../controller/order_controller.dart';
 
 class UserRepo {
   final auth = FirebaseAuth.instance;
   final database = FirebaseDatabase.instance;
+  final googleSignIn = GoogleSignIn();
 
   SharedPreferences sharedPreferences = Get.find();
 
@@ -63,21 +66,47 @@ class UserRepo {
     Map<dynamic, dynamic> userMap =
         databaseEvent.snapshot.value as Map<dynamic, dynamic>;
 
-    sharedPreferences.setString(AppConstants.USER_EMAIL, userMap["email"]);
-    sharedPreferences.setString(AppConstants.USER_NAME, userMap["name"]);
-    sharedPreferences.setString(AppConstants.USER_PHONE, userMap["phone"]);
+    if (userMap["email"] != null) {
+      sharedPreferences.setString(AppConstants.USER_EMAIL, userMap["email"]);
+    } else {
+      sharedPreferences.remove(AppConstants.USER_EMAIL);
+    }
+
+    if (userMap["name"] != null) {
+      sharedPreferences.setString(AppConstants.USER_NAME, userMap["name"]);
+    } else {
+      sharedPreferences.remove(AppConstants.USER_NAME);
+    }
+
+    if (userMap["phone"] != null) {
+      sharedPreferences.setString(AppConstants.USER_PHONE, userMap["phone"]);
+    } else {
+      sharedPreferences.remove(AppConstants.USER_PHONE);
+    }
   }
 
-  String getNameFromSharedPreferences() {
-    return sharedPreferences.getString(AppConstants.USER_NAME)!;
+  String? getNameFromSharedPreferences() {
+    if (sharedPreferences.containsKey(AppConstants.USER_NAME)){
+      return sharedPreferences.getString(AppConstants.USER_NAME)!;
+    }
+
+    return null;
   }
 
-  String getEmailFromSharedPreferences() {
-    return sharedPreferences.getString(AppConstants.USER_EMAIL)!;
+  String? getEmailFromSharedPreferences() {
+    if (sharedPreferences.containsKey(AppConstants.USER_EMAIL)){
+      return sharedPreferences.getString(AppConstants.USER_EMAIL)!;
+    }
+
+    return null;
   }
 
-  String getPhoneFromSharedPreferences() {
-    return sharedPreferences.getString(AppConstants.USER_PHONE)!;
+  String? getPhoneFromSharedPreferences() {
+    if (sharedPreferences.containsKey(AppConstants.USER_PHONE)){
+      return sharedPreferences.getString(AppConstants.USER_PHONE)!;
+    }
+
+    return null;
   }
 
   void logout() {
@@ -94,6 +123,42 @@ class UserRepo {
         .sendPasswordResetEmail(email: email)
         .onError((error, stackTrace) => toast().generateToast(error.toString()))
         .whenComplete(() => toast().generatePositiveToast("Recovery Email was sent."));
+  }
+
+  Future<void> loginThroughGoogle() async {
+
+    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+    if (googleSignInAccount != null) {
+      final GoogleSignInAuthentication googleSignInAuth = await googleSignInAccount.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuth.accessToken,
+        idToken: googleSignInAuth.idToken,
+      );
+
+      final userCredential = await auth.signInWithCredential(credential);
+
+      await database.ref("Users").child(userCredential.user!.uid).set({
+        "name": userCredential.user!.displayName,
+        "email": userCredential.user!.email,
+        "phone": userCredential.user!.phoneNumber,
+      });
+
+
+      await Get.find<CartController>().getCartItemsFromFirebase();
+      await Get.find<OrderController>().getOrdersFromFirebase();
+      await getUserDetailsFromFirebase(userCredential.user!.uid);
+      Get.find<CartController>().getCartData();
+      Get.find<OrderController>().getListOfOrders();
+      Get.offAll(()=> const HomePage());
+
+    }
+
+    // try{
+    //
+    // }catch (error) {
+    //   toast().generateToast(error.toString());
+    //   print(error);
+    // }
   }
 }
 
