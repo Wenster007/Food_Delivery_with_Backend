@@ -44,6 +44,14 @@ class UserController extends GetxController {
     userRepo.logout();
   }
 
+  Future<void> sendForgotPasswordEmail(String email) async {
+    isLoading = true;
+    update();
+    await userRepo.forgotPassword(email);
+    isLoading = false;
+    update();
+  }
+
   String get userEmail {
     return userRepo.getEmailFromSharedPreferences();
   }

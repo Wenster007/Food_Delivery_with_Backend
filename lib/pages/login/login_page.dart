@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/controller/user_controller.dart';
+import 'package:food_delivery_with_backend/pages/login/forgot_password_screen.dart';
 import 'package:food_delivery_with_backend/pages/login/sign_up_page.dart';
 
 import '../../utils/colors.dart';
@@ -131,7 +132,7 @@ class LoginPage extends StatelessWidget {
                     text: TextSpan(
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          print("clicked");
+                          Get.to(()=>const ForgotPasswordScreen());
                         },
                       text: "Forgot Password?",
                       style: TextStyle(
