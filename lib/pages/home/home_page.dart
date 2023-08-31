@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_with_backend/pages/cart/order_history.dart';
+import 'package:food_delivery_with_backend/pages/favorite_screen.dart';
 import 'package:food_delivery_with_backend/pages/home/main_food_page.dart';
 import 'package:food_delivery_with_backend/pages/profile/profile_page.dart';
 import 'package:food_delivery_with_backend/utils/colors.dart';
@@ -14,9 +15,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   List<Widget> pages = [
     const MainFoodPage(),
-    Center(child: Text("1"),),
+    const FavoriteScreen(),
     const OrderHistory(),
     const ProfilePage(),
   ];

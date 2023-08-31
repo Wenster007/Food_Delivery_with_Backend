@@ -15,6 +15,7 @@ class OrderController extends GetxController{
   //to addDataTosharedreferences
   void addOrderHistory() {
     orderRepo.addOrderToSharedPreferences();
+    getListOfOrders();
     update();
   }
 
@@ -25,9 +26,12 @@ class OrderController extends GetxController{
     for (int i=0; i<storage.length; i++){
       mapOfOrders.putIfAbsent(storage[i].time!, () => storage[i]);
     }
-
+    print("${mapOfOrders.length} is the number of items in sharedPreferences");
     return listOfTotalOrders;
   }
+
+
+
 
   //for converting map into list.
   List<Order> get listOfTotalOrders {

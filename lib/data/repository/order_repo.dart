@@ -46,6 +46,7 @@ class OrderRepo {
 
   //for fetching Orders from firebase and saving in sharedPreferences
   Future<void> addFirebaseDataToSharedPreferences() async {
+    print("8 adding order firebase to sharepreferences");
     List<String> ordersFetchedFromFirebase = [];
 
     DatabaseEvent databaseEvent =

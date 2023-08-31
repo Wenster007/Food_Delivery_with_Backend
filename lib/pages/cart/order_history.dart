@@ -11,8 +11,11 @@ import '../../widgets/big_text.dart';
 class OrderHistory extends StatelessWidget {
   const OrderHistory({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
+    Get.find<OrderController>().getListOfOrders();
+
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -31,11 +34,11 @@ class OrderHistory extends StatelessWidget {
                 ),
               ),
             ),
-            Get.find<OrderController>().getListOfOrders().isNotEmpty?GetBuilder<OrderController>(
+            Get.find<OrderController>().mapOfOrders.isNotEmpty?GetBuilder<OrderController>(
               builder: (orderController) {
                 return Expanded(
                   child: ListView.builder(
-                    itemCount: orderController.getListOfOrders().length,
+                    itemCount: orderController.mapOfOrders.length,
                     itemBuilder: (context, index) {
                       return OrderItem(
                           order: orderController.listOfTotalOrders[index]);
@@ -43,7 +46,7 @@ class OrderHistory extends StatelessWidget {
                   ),
                 );
               },
-            ):Expanded(child: EmptyCart()),
+            ):const Expanded(child: EmptyCart()),
           ],
         ),
       ),

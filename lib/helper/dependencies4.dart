@@ -7,4 +7,6 @@ import '../data/repository/user_repo.dart';
 void init() {
   Get.put(UserRepo());
   Get.put(UserController(userRepo: Get.find<UserRepo>()));
+
+
 }

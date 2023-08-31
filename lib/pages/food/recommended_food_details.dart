@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_with_backend/controller/favorite_controller.dart';
 import 'package:food_delivery_with_backend/controller/recommended_food_controller.dart';
 import 'package:food_delivery_with_backend/models/product_model.dart';
 import 'package:food_delivery_with_backend/pages/cart/cart_pages.dart';
@@ -105,17 +106,18 @@ class RecommendedFoodDetails extends StatelessWidget {
           ),
 
           SliverToBoxAdapter(
-              child: Column(
-            children: [
-              Container(
-                margin:
-                    EdgeInsets.symmetric(horizontal: Dimensions.height * 0.02),
-                child: ExpandableText(
-                  text: products.description!,
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(
+                      horizontal: Dimensions.height * 0.02),
+                  child: ExpandableText(
+                    text: products.description!,
+                  ),
                 ),
-              )
-            ],
-          ))
+              ],
+            ),
+          ),
         ],
       ),
       bottomNavigationBar: Column(
@@ -171,18 +173,27 @@ class RecommendedFoodDetails extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  padding: EdgeInsets.all(Dimensions.height * 0.02),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius:
-                        BorderRadius.circular(Dimensions.height * 0.02),
-                  ),
-                  child: Icon(
-                    Icons.favorite,
-                    color: AppColor.mainColor,
-                    size: Dimensions.height * 0.03,
+                GetBuilder<FavoriteController>(
+                  builder: (favController) => GestureDetector(
+                    onTap: () {
+                      favController.addItemToFavorite(products);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(Dimensions.height * 0.02),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.height * 0.02),
+                      ),
+                      child: Icon(
+                        Icons.favorite,
+                        color: favController.isFavorite(products)
+                            ? Colors.red
+                            : AppColor.mainColor,
+                        size: Dimensions.height * 0.03,
+                      ),
+                    ),
                   ),
                 ),
                 GetBuilder<RecommendedProductController>(

@@ -19,4 +19,6 @@ class AppConstants{
   static const String USER_PHONE = "user_phone";
 
   static const String PROFILE_IMG_PATH = "profile_img_path";
+
+  static const String LIST_OF_FAVORITE_ITEMS = "list_of_favorite_items";
 }

@@ -119,6 +119,7 @@ class UserController extends GetxController {
     }
     else{
       isProfilePicUploaded = false;
+      profilePicLoading = false;
     }
   }
 

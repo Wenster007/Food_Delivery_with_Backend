@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:food_delivery_with_backend/utils/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/cart_model.dart';
@@ -19,8 +18,6 @@ class CartRepo {
 
   //this is used for adding the items to sharedPreferences cart-list
   void addToCartList(List<CartModel> listOfCartProducts) {
-
-    print("2 adding cart data to shard preferences");
     cart = [];
 
     listOfCartProducts.forEach((element) {
@@ -42,7 +39,6 @@ class CartRepo {
 
   //this is used for getting the items from sharedPreferences cart-list.
   List<CartModel> getCartList() {
-    print("3 getting cart data from shared Preferences");
     List<String> carts = [];
 
     if (sharedPreferences!.containsKey(AppConstants.CART_LIST)) {
@@ -60,7 +56,6 @@ class CartRepo {
 
   //for adding items into order CartHistoryList
   void addToCartHistoryList() {
-    print("4 adding to cart history list");
     cartHistory = [];
     cartHistory = sharedPreferences!.getStringList(AppConstants.CART_LIST)!;
 
@@ -89,7 +84,6 @@ class CartRepo {
         databaseEvent.snapshot.value as Map<dynamic, dynamic>;
 
     if (userMap["cart_items"] != null){
-      debugPrint("getting items from firebase and saving in sharedPreferences");
       final cartItemsMapList = userMap["cart_items"];
 
       for (int i=0; i<cartItemsMapList.length; i++){

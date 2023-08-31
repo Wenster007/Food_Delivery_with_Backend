@@ -11,4 +11,5 @@ void init() async {
   Get.lazyPut(() => CartRepo(sharedPreferences: sharedPreferences));
   Get.lazyPut(() => CartController(Get.find<CartRepo>()));
 
+
 }

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:food_delivery_with_backend/controller/cart_controller.dart';
+import 'package:food_delivery_with_backend/controller/favorite_controller.dart';
 import 'package:food_delivery_with_backend/pages/home/home_page.dart';
 import 'package:food_delivery_with_backend/pages/login/login_page.dart';
 import 'package:food_delivery_with_backend/utils/app_constants.dart';
@@ -42,8 +43,11 @@ class UserRepo {
       await Get.find<CartController>().getCartItemsFromFirebase();
       await Get.find<OrderController>().getOrdersFromFirebase();
       await getUserDetailsFromFirebase(value.user!.uid);
+      await Get.find<FavoriteController>().getFirebaseDataToSharedPreferences();
       Get.find<CartController>().getCartData();
       Get.find<OrderController>().getListOfOrders();
+      Get.find<FavoriteController>().getFavItemsFromSharedPreferences();
+
       Get.offAll(() => const HomePage());
     }).onError((error, stackTrace) {
       toast().generateToast(error.toString());
@@ -57,6 +61,7 @@ class UserRepo {
       Get.offAll(() => const LoginPage());
     } else {
       Get.offAll(() => const HomePage());
+
     }
   }
 
@@ -127,38 +132,37 @@ class UserRepo {
 
   Future<void> loginThroughGoogle() async {
 
-    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
-    if (googleSignInAccount != null) {
-      final GoogleSignInAuthentication googleSignInAuth = await googleSignInAccount.authentication;
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleSignInAuth.accessToken,
-        idToken: googleSignInAuth.idToken,
-      );
+    try{
+      final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuth = await googleSignInAccount.authentication;
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuth.accessToken,
+          idToken: googleSignInAuth.idToken,
+        );
 
-      final userCredential = await auth.signInWithCredential(credential);
+        final userCredential = await auth.signInWithCredential(credential);
 
-      await database.ref("Users").child(userCredential.user!.uid).set({
-        "name": userCredential.user!.displayName,
-        "email": userCredential.user!.email,
-        "phone": userCredential.user!.phoneNumber,
-      });
+        await database.ref("Users").child(userCredential.user!.uid).update({
+          "name": userCredential.user!.displayName,
+          "email": userCredential.user!.email,
+          "phone": userCredential.user!.phoneNumber,
+        });
 
 
-      await Get.find<CartController>().getCartItemsFromFirebase();
-      await Get.find<OrderController>().getOrdersFromFirebase();
-      await getUserDetailsFromFirebase(userCredential.user!.uid);
-      Get.find<CartController>().getCartData();
-      Get.find<OrderController>().getListOfOrders();
-      Get.offAll(()=> const HomePage());
+        await Get.find<CartController>().getCartItemsFromFirebase();
+        await Get.find<OrderController>().getOrdersFromFirebase();
+        await getUserDetailsFromFirebase(userCredential.user!.uid);
+        await Get.find<FavoriteController>().getFirebaseDataToSharedPreferences();
+        Get.find<CartController>().getCartData();
+        Get.find<OrderController>().getListOfOrders();
+        Get.find<FavoriteController>().getFavItemsFromSharedPreferences();
+        Get.offAll(()=> const HomePage());
 
+      }
+    }catch (error) {
+      toast().generateToast(error.toString());
     }
-
-    // try{
-    //
-    // }catch (error) {
-    //   toast().generateToast(error.toString());
-    //   print(error);
-    // }
   }
 }
 
